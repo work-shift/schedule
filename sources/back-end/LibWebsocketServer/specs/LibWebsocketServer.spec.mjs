@@ -12,14 +12,25 @@ import {
 import {
   LibWebsocketServer,
 } from '../LibWebsocketServer.mjs';
+import {
+  Paths,
+} from '../paths/Paths.mjs';
 
 describe('LibWebsocketServer', function describeLibWebsocketServer() {
   const debuglog = util.debuglog(`${LibWebsocketServer.name}:specs`);
 
   let server = null;
   const getServerConfig = () => Object.freeze({
-    host: process.env.WS_HOST,
-    port: parseInt(process.env.WS_PORT, 10),
+    server: {
+      host: process.env.WS_HOST,
+      port: parseInt(process.env.WS_PORT, 10),
+    },
+    pathOpts: {
+      [Paths.ROOT]: {
+        maxPayloadLength: 16 * 1024 * 1024,
+        idleTimeout: 12,
+      },
+    },
   });
 
   before(async () => {
