@@ -19,6 +19,15 @@ export class LibWebsocketServer {
     this.#config = Object.freeze({ ...config });
   }
 
+  #getOptsByPath(path = null) {
+    return {
+      ...this.#config.pathOpts[path],
+      ...{
+        compression: uWS.SHARED_COMPRESSOR,
+      },
+    } ?? null;
+  }
+
   start() {
     return new Promise((resolve, reject) => {
       if (this.#handle) {
@@ -28,19 +37,21 @@ export class LibWebsocketServer {
       } else {
         this.#server = uWS
           .App({})
-          .ws(Paths.ROOT, handleRootPath())
+          .ws(Paths.ROOT, handleRootPath({
+            wsOpts: this.#getOptsByPath(Paths.ROOT),
+          }))
           .any('/*', (res) => {
             res.end('go away');
           })
-          .listen(this.#config.port, this.#config.host, (handle) => {
+          .listen(this.#config.server.port, this.#config.server.host, (handle) => {
             if (handle) {
               this.#handle = handle;
 
-              this.#debuglog(`${this.constructor.name} started on ${this.#config.host}:${this.#config.port}`);
+              this.#debuglog(`${this.constructor.name} started on ${this.#config.server.host}:${this.#config.server.port}`);
 
               resolve();
             } else {
-              reject(new Error(`${this.constructor.name} FAILED to start on ${this.#config.host}:${this.#config.port}`));
+              reject(new Error(`${this.constructor.name} FAILED to start on ${this.#config.server.host}:${this.#config.server.port}`));
             }
           });
       }
@@ -53,6 +64,6 @@ export class LibWebsocketServer {
       this.#handle = null;
     }
 
-    this.#debuglog(`${this.constructor.name} stopped listening to ${this.#config.host}:${this.#config.port}`);
+    this.#debuglog(`${this.constructor.name} stopped listening on ${this.#config.server.host}:${this.#config.server.port}`);
   }
 }

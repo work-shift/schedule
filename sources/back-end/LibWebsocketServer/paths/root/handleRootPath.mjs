@@ -8,7 +8,7 @@ import {
   handleClose as close,
 } from './handleClose.mjs';
 
-export const handleRootPath = (wsOpts = null) => ({
+export const handleRootPath = ({ wsOpts = null }) => Object.freeze({
   ...wsOpts,
   open,
   message,
