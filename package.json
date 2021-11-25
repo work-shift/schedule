@@ -1,0 +1,46 @@
+{
+  "name": "@work-shift/schedule",
+  "version": "0.0.0",
+  "description": "Work Shift Schedule",
+  "type": "module",
+  "engines": {
+    "node": "^17.1.0",
+    "pnpm": "^6.22.2"
+  },
+  "engineStrict": true,
+  "volta": {
+    "node": "17.1.0"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/work-shift/schedule.git"
+  },
+  "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/work-shift/schedule/issues"
+  },
+  "homepage": "https://github.com/work-shift/schedule#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/eslint-plugin": "^7.14.5",
+    "@babel/preset-env": "^7.16.4",
+    "@changesets/cli": "^2.18.0",
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-import-resolver-node": "^0.3.6",
+    "eslint-module-utils": "^2.7.1",
+    "eslint-plugin-chai-friendly": "^0.7.2",
+    "eslint-plugin-es": "^4.1.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-rule-composer": "^0.3.0",
+    "eslint-scope": "^7.1.0",
+    "eslint-utils": "^3.0.0",
+    "eslint-visitor-keys": "^3.1.0"
+  }
+}
