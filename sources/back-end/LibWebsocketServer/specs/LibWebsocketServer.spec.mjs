@@ -9,6 +9,7 @@ import {
 import {
   expect,
 } from 'chai';
+import WebSocket from 'ws';
 import {
   LibWebsocketServer,
 } from '../LibWebsocketServer.mjs';
@@ -18,8 +19,10 @@ import {
 
 describe('LibWebsocketServer', function describeLibWebsocketServer() {
   const debuglog = util.debuglog(`${LibWebsocketServer.name}:specs`);
+  const encoder = new TextEncoder();
 
   let server = null;
+  let serverConfig = null;
   const getServerConfig = () => Object.freeze({
     server: {
       host: process.env.WS_HOST,
@@ -37,16 +40,53 @@ describe('LibWebsocketServer', function describeLibWebsocketServer() {
     dotenv.config({
       path: './specs/.env',
     });
-    server = new LibWebsocketServer(getServerConfig());
+    serverConfig = getServerConfig();
+    server = new LibWebsocketServer(serverConfig);
 
-    return await server.start();
+    await server.start();
   });
 
   after(() => {
     server.stop();
   });
 
-  it('should start/stop the LibWebsocketServer instance', async () => {
-    expect(true).to.be.true;
+  // FIXME: this is a temporary test
+  it('should send a binary message', (done) => {
+    const client = new WebSocket(`ws://${serverConfig.server.host}:${serverConfig.server.port}`);
+
+    client.binaryType = 'arraybuffer';
+
+    const message = {
+      type: 'example-type',
+      payload: {
+        hello: 'world',
+      },
+    };
+
+    client.on('open', function clientOpen() {
+      const binaryMessage = encoder.encode(JSON.stringify(message));
+
+      client.send(binaryMessage);
+    });
+
+    client.on('message', (data) => {
+      debuglog({ data });
+
+      client.close(1000, 'bye');
+    });
+
+    client.on('close', function clientClose(code = null, reason = null) {
+      debuglog({
+        code,
+      });
+      expect(code).to.exist;
+
+      debuglog({
+        reason,
+      });
+      expect(reason).to.exist;
+
+      done();
+    });
   });
 });

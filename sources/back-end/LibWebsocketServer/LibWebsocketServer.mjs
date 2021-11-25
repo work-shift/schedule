@@ -39,6 +39,7 @@ export class LibWebsocketServer {
           .App({})
           .ws(Paths.ROOT, handleRootPath({
             wsOpts: this.#getOptsByPath(Paths.ROOT),
+            debuglog: this.#debuglog,
           }))
           .any('/*', (res) => {
             res.end('go away');

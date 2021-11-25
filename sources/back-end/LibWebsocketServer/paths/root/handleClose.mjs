@@ -1,2 +1,11 @@
-// eslint-disable-next-line no-unused-vars
-export const handleClose = (ws, code, message) => {};
+export function handleClose(ws, code, message) {
+  const {
+    id,
+  } = this.socketProps.get(ws);
+
+  if (this.sockets.has(id)) {
+    this.sockets.delete(id);
+  }
+
+  this.debuglog(`handleClose ${code} and`, message);
+}
