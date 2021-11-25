@@ -1,0 +1,24 @@
+dist: focal
+language: minimal
+os: linux
+env:
+  global:
+    - PATH=$HOME/.volta:$HOME/.volta/bin:$PATH
+before_install:
+  # - sudo add-apt-repository -y ppa:redislabs/redis
+  # - sudo apt-get -q update && sudo apt-get -y install redis
+  - curl https://get.volta.sh | bash
+  - volta install node@17.1.0
+  - volta install pnpm@6.22.2
+  - pnpm config set store-dir ~/.pnpm-store
+install:
+  - pnpm --recursive install
+script:
+  - pnpm --recursive --if-present --workspace-concurrency=1 test
+# after_success:
+#   - pnpm --recursive run coverage
+cache:
+  npm: false
+  directories:
+    - "~/.pnpm-store"
+    - "$HOME/.volta"
