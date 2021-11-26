@@ -1,6 +1,9 @@
-dist: focal
-language: minimal
 os: linux
+virt: lxd
+dist: focal
+group: edge
+arch: arm64-graviton2
+language: minimal
 env:
   global:
     - PATH=$HOME/.volta:$HOME/.volta/bin:$PATH
