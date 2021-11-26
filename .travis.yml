@@ -19,7 +19,7 @@ script:
   - pnpm --recursive --if-present --workspace-concurrency=1 test
 after_success:
   - ./codecov -t ${CODECOV_TOKEN}
-  - pnpm --recursive run coveralls
+  - pnpm --recursive --if-present --workspace-concurrency=1 run coveralls
 cache:
   npm: false
   directories:
