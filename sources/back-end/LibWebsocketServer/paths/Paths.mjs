@@ -1,3 +1,5 @@
 export const Paths = Object.freeze({
-  ROOT: '/*',
+  API: '/api/*',
+  REGISTER: '/register',
+  AUTHENTICATE: '/authenticate',
 });

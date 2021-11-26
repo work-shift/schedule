@@ -13,7 +13,7 @@ const ctx = {
   sockets: new Map(),
 };
 
-export const handleRootPath = ({
+export const handleAuthenticatePath = ({
   wsOpts = null,
   debuglog = null,
 }) => {

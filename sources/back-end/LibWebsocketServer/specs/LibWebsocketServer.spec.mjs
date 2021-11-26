@@ -33,6 +33,10 @@ describe('LibWebsocketServer', function describeLibWebsocketServer() {
         maxPayloadLength: 16 * 1024 * 1024,
         idleTimeout: 12,
       },
+      [Paths.REGISTER]: {
+        maxPayloadLength: 16 * 1024 * 1024,
+        idleTimeout: 12,
+      },
     },
   });
 
