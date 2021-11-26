@@ -4,8 +4,14 @@ import {
   Paths,
 } from './paths/Paths.mjs';
 import {
-  handleRootPath,
-} from './paths/root/handleRootPath.mjs';
+  handleApiPath,
+} from './paths/api/handleApiPath.mjs';
+import {
+  handleRegisterPath,
+} from './paths/register/handleRegisterPath.mjs';
+import {
+  handleAuthenticatePath,
+} from './paths/authenticate/handleAuthenticatePath.mjs';
 
 export class LibWebsocketServer {
   // eslint-disable-next-line class-methods-use-this
@@ -37,8 +43,16 @@ export class LibWebsocketServer {
       } else {
         this.#server = uWS
           .App({})
-          .ws(Paths.ROOT, handleRootPath({
-            wsOpts: this.#getOptsByPath(Paths.ROOT),
+          .ws(Paths.REGISTER, handleRegisterPath({
+            wsOpts: this.#getOptsByPath(Paths.REGISTER),
+            debuglog: this.#debuglog,
+          }))
+          .ws(Paths.AUTHENTICATE, handleAuthenticatePath({
+            wsOpts: this.#getOptsByPath(Paths.AUTHENTICATE),
+            debuglog: this.#debuglog,
+          }))
+          .ws(Paths.API, handleApiPath({
+            wsOpts: this.#getOptsByPath(Paths.API),
             debuglog: this.#debuglog,
           }))
           .any('/*', (res) => {
