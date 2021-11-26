@@ -1,6 +1,5 @@
 {
   "reporter": [
-    "cobertura",
     "lcov"
   ],
   "extension": [
@@ -34,5 +33,5 @@
   "branches": "82",
   "statements": "95",
   "all": true,
-  "check-coverage": false
+  "check-coverage": true
 }
