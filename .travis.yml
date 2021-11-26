@@ -11,12 +11,14 @@ before_install:
   - volta install node@17.1.0
   - volta install pnpm@6.22.2
   - pnpm config set store-dir ~/.pnpm-store
+  - curl -Os https://uploader.codecov.io/latest/linux/codecov
+  - chmod +x codecov
 install:
   - pnpm --recursive install
 script:
   - pnpm --recursive --if-present --workspace-concurrency=1 test
-# after_success:
-#   - pnpm --recursive run coverage
+after_success:
+  - ./codecov -t ${CODECOV_TOKEN}
 cache:
   npm: false
   directories:
