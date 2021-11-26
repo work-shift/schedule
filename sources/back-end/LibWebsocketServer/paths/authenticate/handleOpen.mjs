@@ -8,5 +8,5 @@ export function handleOpen(ws) {
   this.socketProps.set(ws, { id });
   this.sockets.set(id, ws);
 
-  this.debuglog(`ws opened with ${id}`, this.sockets);
+  this.debuglog(`ws#${id} is now open`);
 }

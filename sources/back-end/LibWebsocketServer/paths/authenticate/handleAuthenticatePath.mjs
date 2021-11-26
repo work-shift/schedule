@@ -19,8 +19,6 @@ export const handleAuthenticatePath = ({
 }) => {
   const context = Object.freeze({ ...ctx, ...{ debuglog } });
 
-  debuglog({ context });
-
   return Object.freeze({
     ...wsOpts,
     open: open.bind(context),
