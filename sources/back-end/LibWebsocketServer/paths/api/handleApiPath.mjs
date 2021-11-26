@@ -7,6 +7,9 @@ import {
 import {
   handleClose as close,
 } from './handleClose.mjs';
+import {
+  handleUpgrade as upgrade,
+} from './handleUpgrade.mjs';
 
 const ctx = {
   socketProps: new WeakMap(),
@@ -19,10 +22,9 @@ export const handleApiPath = ({
 }) => {
   const context = Object.freeze({ ...ctx, ...{ debuglog } });
 
-  debuglog({ context });
-
   return Object.freeze({
     ...wsOpts,
+    upgrade: upgrade.bind(context),
     open: open.bind(context),
     message: message.bind(context),
     close: close.bind(context),

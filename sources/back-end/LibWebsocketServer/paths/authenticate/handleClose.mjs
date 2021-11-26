@@ -1,3 +1,5 @@
+const decoder = new TextDecoder();
+
 export function handleClose(ws, code, message) {
   const {
     id,
@@ -7,5 +9,5 @@ export function handleClose(ws, code, message) {
     this.sockets.delete(id);
   }
 
-  this.debuglog(`handleClose ${code} and`, message);
+  this.debuglog(`handleClose ws#${id} with code "${code}" and reason "${decoder.decode(message)}"`);
 }
