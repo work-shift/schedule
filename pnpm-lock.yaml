@@ -40,7 +40,7 @@ importers:
       eslint-utils: 3.0.0_eslint@8.3.0
       eslint-visitor-keys: 3.1.0
 
-  sources/back-end/LibWebsocketServer:
+  sources/back-end/libs/LibWebsocketServer:
     specifiers:
       '@work-shift/lib-websocket-error-codes': workspace:^0.0.7
       c8: ^7.10.0
@@ -57,7 +57,7 @@ importers:
       uWebSockets.js: github:uNetworking/uWebSockets.js#v20.4.0
       ws: ^8.3.0
     dependencies:
-      '@work-shift/lib-websocket-error-codes': link:../../common/WebsocketErrorCodes
+      '@work-shift/lib-websocket-error-codes': link:../../../common/WebsocketErrorCodes
       uWebSockets.js: github.com/uNetworking/uWebSockets.js/65f39bdff763be3883e6cf18e433dd4fec155845
     devDependencies:
       c8: 7.10.0
