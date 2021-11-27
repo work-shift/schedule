@@ -13,7 +13,8 @@
   },
   "main": "./LibWebsocketServer.mjs",
   "exports": {
-    ".": "./LibWebsocketServer.mjs"
+    "./LibWebsocketServer.mjs": "./LibWebsocketServer.mjs",
+    "./Paths.mjs": "./paths/Paths.mjs"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",

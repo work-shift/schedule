@@ -1,0 +1,25 @@
+{
+  "name": "@work-shift/websocketserver",
+  "version": "0.0.0",
+  "description": "Websocket Server",
+  "type": "module",
+  "engines": {
+    "node": "^17.1.0",
+    "pnpm": "^6.22.2"
+  },
+  "engineStrict": true,
+  "volta": {
+    "node": "17.1.0"
+  },
+  "main": "./server.mjs",
+  "bin": "./server.mjs",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
+  "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@work-shift/lib-websocket-server": "workspace:^0.0.0",
+    "dotenv": "^10.0.0"
+  }
+}
