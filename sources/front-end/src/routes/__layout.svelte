@@ -1,13 +1,15 @@
+<script>
+  import '../app.css';
+</script>
+
 <style>
   main {
-    flex: 1;
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-    width: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
     box-sizing: border-box;
+    min-width: 100vw;
+    min-height: 100vh;
   }
 </style>
 
