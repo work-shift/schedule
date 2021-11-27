@@ -73,6 +73,14 @@ importers:
       mocha-lcov-reporter: 1.3.0
       ws: 8.3.0
 
+  sources/back-end/services/WebsocketServer:
+    specifiers:
+      '@work-shift/lib-websocket-server': workspace:^0.0.0
+      dotenv: ^10.0.0
+    dependencies:
+      '@work-shift/lib-websocket-server': link:../../libs/LibWebsocketServer
+      dotenv: 10.0.0
+
   sources/common/WebsocketErrorCodes:
     specifiers:
       '@babel/core': ^7.16.0
@@ -2313,7 +2321,6 @@ packages:
   /dotenv/10.0.0:
     resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
     engines: {node: '>=10'}
-    dev: true
 
   /ecc-jsbn/0.1.2:
     resolution: {integrity: sha1-OoOpBOVDUyh4dMVkt1SThoSamMk=}
