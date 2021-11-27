@@ -38,14 +38,13 @@
         publicKey: publicKeyCredentialCreationOptions,
       });
 
-      isCreatingCredentials = false;
-
       console.log({
         publicKeyCredential,
-        isCreatingCredentials,
       });
     } catch(credentialsError) {
       console.error(credentialsError);
+    } finally {
+      isCreatingCredentials = false;
     }
   }
 
@@ -79,8 +78,6 @@
     padding: 0;
 
     border: none;
-    color: white;
-    filter: none;
 
     background-color: transparent;
 
@@ -90,7 +87,6 @@
 
   .isCreatingCredentials {
     pointer-events: none;
-    filter: opacity(0.5);
   }
 </style>
 
