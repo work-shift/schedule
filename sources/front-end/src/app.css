@@ -1,0 +1,45 @@
+:root {
+  --font-family: InterVarExperimental;
+  --background-color: hsl(0deg 0% 10%);
+  --accent-color: hsl(24, 100%, 50%);
+  --heading-color: hsl(0deg 0% 82%);
+  --text-color: var(--heading-color);
+  --contain: content;
+
+  /* http://www.roblaplaca.com/examples/bezierBuilder/ */
+  --transition-timing-function: cubic-bezier(.20, 0, .19, 1);
+  --transition-duration: 0.125s;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font-family: var(--font-family);
+
+  /* letter-spacing: 0.1em; */
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-variation-settings: "wght" 400, "slnt" 0;
+  /* letter-spacing: -0.022em; */
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "case" 0, "cpsp" 0, "dlig" 0, "frac" 0, "dnom" 0, "numr" 0, "salt" 0, "subs" 0, "sups" 0, "tnum", "zero", "ss01", "ss02" 0, "ss03" 0, "ss04" 0, "cv01" 0, "cv02" 0, "cv03" 0, "cv04" 0, "cv05" 0, "cv06" 0, "cv07", "cv08" 0, "cv09" 0, "cv10" 0, "cv11" 0, "calt", "ccmp", "kern";
+}
+
+body > * {
+  position: relative;
+  user-select: none;
+  /* pointer-events: none; */
+}
+
+#schedule {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

@@ -1,19 +1,31 @@
 {
-  "name": "front-end",
-  "version": "0.0.1",
+  "name": "@work-shift/front-end",
+  "version": "0.0.0",
+  "description": "schedule",
+  "type": "module",
+  "engines": {
+    "node": "^17.1.0",
+    "pnpm": "^6.22.2"
+  },
+  "engineStrict": true,
+  "volta": {
+    "node": "17.1.0"
+  },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
     "lint": "eslint --ignore-path .gitignore ."
   },
+  "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
-    "@sveltejs/adapter-auto": "next",
-    "@sveltejs/kit": "next",
-    "eslint": "^7.32.0",
+    "@sveltejs/adapter-node": "^1.0.0-next.55",
+    "@sveltejs/kit": "^1.0.0-next.201",
+    "eslint": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.1",
-    "svelte": "^3.44.0"
-  },
-  "type": "module"
+    "svelte": "^3.44.2"
+  }
 }

@@ -1,0 +1,23 @@
+{
+  "short_name": "macaroons",
+  "name": "macaroons berlin",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "hsl(0deg 0% 10%)",
+  "theme_color": "hsl(0deg 0% 82%)",
+  "display": "standalone",
+  "scope": "/",
+  "shortcuts": [],
+  "description": "simply the best macaroons in Berlin"
+}
