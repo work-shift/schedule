@@ -5,18 +5,58 @@
 <script>
   import FingerPrintIcon from '$lib/icons/FingerPrint.svelte';
 
-  let isActiveButton = false;
+  let isCreatingCredentials = false;
 
-  $: {
-    console.log({ isActiveButton });
+  const publicKeyCredentialCreationOptions = {
+    challenge: Uint8Array.from('random-bytes-from-server', (c) =>  c.charCodeAt(0)),
+    rp: {
+      name: 'schedule',
+      id: 'localhost',
+    },
+    user: {
+      id: Uint8Array.from('user-random-id', (c) => c.charCodeAt(0)),
+      name: 'user-random-name',
+      displayName: 'user-random-displayName',
+    },
+    pubKeyCredParams: [
+      {
+        alg: -7,
+        type: 'public-key',
+      },
+    ],
+    authenticatorSelection: {
+      authenticatorAttachment: 'platform',
+      userVerification: 'required',
+    },
+    timeout: 60000,
+    attestation: 'enterprise', // direct
+  };
+
+  const createCredentials = async () => {
+    try {
+      const publicKeyCredential = await navigator.credentials.create({
+        publicKey: publicKeyCredentialCreationOptions,
+      });
+
+      isCreatingCredentials = false;
+
+      console.log({
+        publicKeyCredential,
+        isCreatingCredentials,
+      });
+    } catch(credentialsError) {
+      console.error(credentialsError);
+    }
   }
 
-  const handleButtonClick = (pointerEvent) => {
-    isActiveButton = true;
+  const handleButtonKeyDown = (pointerEvent) => {
+    isCreatingCredentials = true;
 
-    const to = setTimeout(() => {
-      isActiveButton = false;
-    }, 100);
+    createCredentials();
+  }
+  
+  const handleButtonKeyUp = (pointerEvent) => {
+    isCreatingCredentials = false;
   }
 </script>
 
@@ -39,16 +79,30 @@
     padding: 0;
 
     border: none;
+    color: white;
+    filter: none;
 
     background-color: transparent;
 
     width: min(25vw, 25vh);
     height: min(25vw, 25vh);
   }
+
+  .isCreatingCredentials {
+    pointer-events: none;
+    filter: opacity(0.5);
+  }
 </style>
 
 <div>
-  <button type='button' on:click|trusted={handleButtonClick}>
-    <FingerPrintIcon isActive={ isActiveButton } />
+  <button
+    type='button'
+    on:mousedown={handleButtonKeyDown}
+    on:mouseup={handleButtonKeyUp}
+    on:touchstart|trusted|passive={handleButtonKeyDown}
+    on:touchend|trusted|passive={handleButtonKeyUp}
+    class:isCreatingCredentials
+  >
+    <FingerPrintIcon isActive={ isCreatingCredentials } />
   </button>
 </div>
