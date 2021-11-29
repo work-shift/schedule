@@ -6,9 +6,9 @@ import {
 import {
   handleApiPath,
 } from './paths/api/handleApiPath.mjs';
-import {
-  handleRegisterPath,
-} from './paths/register/handleRegisterPath.mjs';
+// import {
+//   handleRegisterPath,
+// } from './paths/register/handleRegisterPath.mjs';
 import {
   handleAuthenticatePath,
 } from './paths/authenticate/handleAuthenticatePath.mjs';
@@ -43,10 +43,10 @@ export class LibWebsocketServer {
       } else {
         this.#server = uWS
           .App({})
-          .ws(Paths.REGISTER, handleRegisterPath({
-            wsOpts: this.#getOptsByPath(Paths.REGISTER),
-            debuglog: this.#debuglog,
-          }))
+          // .ws(Paths.REGISTER, handleRegisterPath({
+          //   wsOpts: this.#getOptsByPath(Paths.REGISTER),
+          //   debuglog: this.#debuglog,
+          // }))
           .ws(Paths.AUTHENTICATE, handleAuthenticatePath({
             wsOpts: this.#getOptsByPath(Paths.AUTHENTICATE),
             debuglog: this.#debuglog,
