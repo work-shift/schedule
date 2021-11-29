@@ -9,9 +9,9 @@ import {
 // import {
 //   handleRegisterPath,
 // } from './paths/register/handleRegisterPath.mjs';
-import {
-  handleAuthenticatePath,
-} from './paths/authenticate/handleAuthenticatePath.mjs';
+// import {
+//   handleAuthenticatePath,
+// } from './paths/authenticate/handleAuthenticatePath.mjs';
 
 export class LibWebsocketServer {
   // eslint-disable-next-line class-methods-use-this
@@ -47,10 +47,10 @@ export class LibWebsocketServer {
           //   wsOpts: this.#getOptsByPath(Paths.REGISTER),
           //   debuglog: this.#debuglog,
           // }))
-          .ws(Paths.AUTHENTICATE, handleAuthenticatePath({
-            wsOpts: this.#getOptsByPath(Paths.AUTHENTICATE),
-            debuglog: this.#debuglog,
-          }))
+          // .ws(Paths.AUTHENTICATE, handleAuthenticatePath({
+          //   wsOpts: this.#getOptsByPath(Paths.AUTHENTICATE),
+          //   debuglog: this.#debuglog,
+          // }))
           .ws(Paths.API, handleApiPath({
             wsOpts: this.#getOptsByPath(Paths.API),
             debuglog: this.#debuglog,

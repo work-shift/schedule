@@ -1,8 +1,8 @@
 import {
   Communicator,
-} from './components/Communicator/Communicator.mjs';
+} from './Communicator/Communicator.mjs';
 
-export class Ldr {
+export class WorkerManager {
   constructor(communicatorConfig = null) {
     this.communicatorConfig = Object.freeze({ ...communicatorConfig });
     this.communicator = null;
@@ -13,7 +13,7 @@ export class Ldr {
   async start() {
     this.communicator = new Communicator();
 
-    await this.communicator.start(`${this.communicatorConfig.address}/${this.communicatorConfig.endpoints.register}`);
+    await this.communicator.start(`${this.communicatorConfig.address}/`);
 
     // window.postMessage({
     //   type: 'register:start',
