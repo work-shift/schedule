@@ -38,6 +38,14 @@
     <!-- <meta name="theme-color" content="#ffffff"> -->
 
     %svelte.head%
+
+    <script>
+      window.addEventListener('sveltekit:start', function handleSvelteKitStart(svelteKitStartEvent) {
+        console.log({
+          svelteKitStartEvent,
+        });
+      });
+    </script>
   </head>
   <body>
     <div id="schedule">%svelte.body%</div>

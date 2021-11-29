@@ -15,7 +15,7 @@ const config = {
     target: '#schedule',
     hydrate: true,
     router: true,
-    ssr: true,
+    ssr: false,
     files: {
       serviceWorker: 'src/service-worker/index.mjs',
     },

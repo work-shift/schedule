@@ -51,7 +51,12 @@
   const handleButtonKeyDown = (pointerEvent) => {
     isCreatingCredentials = true;
 
-    createCredentials();
+    // createCredentials();
+
+    window.postMessage({
+      type: 'register:start',
+      payload: {},
+    });
   }
   
   const handleButtonKeyUp = (pointerEvent) => {
