@@ -1,9 +1,4 @@
-export const encode = (binaryArray, debuglog = () => {}) => {
-  const result = btoa(binaryArray);
+const decoder = new TextDecoder('utf8');
 
-  debuglog({
-    result,
-  });
-
-  return result;
-};
+// eslint-disable-next-line no-unused-vars
+export const encode = (binaryArray, debuglog = () => {}) => btoa(decoder.decode(Uint8Array.from(binaryArray)));
