@@ -108,6 +108,7 @@ export class Communicator {
 
   async stop() {
     if (typeof this.client !== 'undefined') {
+      // FIXME: should wait for the close event
       this.client.close(WebsocketErrorCodes.CLOSE_NORMAL, this.CLOSE_MESSAGE);
 
       window.removeEventListener('message', this.handleCustomEvent);
