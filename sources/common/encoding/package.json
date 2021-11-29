@@ -1,7 +1,7 @@
 {
-  "name": "@work-shift/lib-websocket-server",
-  "version": "0.0.0",
-  "description": "[lib] Websocket Server",
+  "name": "@work-shift/encoding",
+  "version": "0.0.7",
+  "description": "[lib] binary encoding",
   "type": "module",
   "engines": {
     "node": "^17.1.0",
@@ -11,47 +11,43 @@
   "volta": {
     "node": "17.1.0"
   },
-  "main": "./LibWebsocketServer.mjs",
   "exports": {
-    "./LibWebsocketServer.mjs": "./LibWebsocketServer.mjs",
-    "./Paths.mjs": "./paths/Paths.mjs"
+    "./encode.mjs": "./encode.mjs",
+    "./decode.mjs": "./decode.mjs"
   },
+  "files": [
+    "encode.mjs",
+    "decode.mjs"
+  ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "./node_modules/.bin/eslint ./ --ext .mjs",
-    "test": "pnpm run lint && NODE_ENV=test NODE_DEBUG=LibWebsocketServer* ./node_modules/.bin/c8 ./node_modules/.bin/mocha",
-    "coveralls": "./node_modules/.bin/coveralls < ./coverage/lcov.info"
+    "test": "pnpm run lint && NODE_ENV=test NODE_DEBUG=encode* ./node_modules/.bin/c8 ./node_modules/.bin/mocha"
   },
   "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "@work-shift/encoding": "workspace:^0.0.7",
-    "@work-shift/lib-websocket-error-codes": "workspace:^0.0.7",
-    "fido2-lib": "^2.6.8",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.4.0"
-  },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/eslint-plugin": "^7.14.5",
+    "@babel/preset-env": "^7.16.4",
     "c8": "^7.10.0",
     "chai": "^4.3.4",
-    "coveralls": "^3.1.1",
-    "dotenv": "^10.0.0",
     "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
-    "mocha": "^9.1.3",
-    "mocha-lcov-reporter": "^1.3.0",
-    "ws": "^8.3.0"
+    "mocha": "^9.1.3"
   },
   "mocha": {
     "allowUncaught": true,
     "failZero": true,
-    "async-only": false,
+    "asyncOnly": true,
     "bail": true,
     "checkLeaks": true,
-    "forbidOnly": true,
     "exit": true,
+    "forbidOnly": true,
     "forbidPending": true,
     "slow": 50,
     "timeout": 1000,
