@@ -40,14 +40,6 @@ describe('LibWebsocketServer', function describeLibWebsocketServer() {
         maxPayloadLength: 16 * 1024 * 1024,
         idleTimeout: 12,
       },
-      [Paths.REGISTER]: {
-        maxPayloadLength: 16 * 1024 * 1024,
-        idleTimeout: 12,
-      },
-      [Paths.AUTHENTICATE]: {
-        maxPayloadLength: 16 * 1024 * 1024,
-        idleTimeout: 12,
-      },
     },
   });
 
@@ -67,7 +59,7 @@ describe('LibWebsocketServer', function describeLibWebsocketServer() {
 
   it(`should use the ${Paths.API} route with fake token`, (done) => {
     const fakeToken = randomUUID();
-    const connectionString = `ws://${serverConfig.server.host}:${serverConfig.server.port}/api/${fakeToken}`;
+    const connectionString = `ws://${serverConfig.server.host}:${serverConfig.server.port}/${fakeToken}`;
     const client = new WebSocket(connectionString);
 
     client.binaryType = 'arraybuffer';
