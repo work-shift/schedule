@@ -4,29 +4,26 @@
     onDestroy,
   } from 'svelte';
   import {
-    Ldr,
-  } from '$lib/logic/ldr.mjs';
+    WorkerManager,
+  } from '$lib/workers/WorkerManager.mjs';
   import '../app.css';
 
-  let ldr;
+  let workerManager;
   const communicatorConfig = Object.freeze({
-    address: 'ws://127.0.0.1:9090',
-    endpoints: {
-      register: 'register',
-    },
+    address: 'ws://127.0.0.1:9090/',
   });
 
   onMount(async () => {
-    ldr = new Ldr(communicatorConfig);
+    workerManager = new WorkerManager(communicatorConfig);
 
-    return await ldr.start();
+    return await workerManager.start();
   });
 
   onDestroy(async () => {
-    if (typeof ldr !== 'undefined') {
-      await ldr.stop();
+    if (typeof workerManager !== 'undefined') {
+      await workerManager.stop();
 
-      ldr = undefined;
+      workerManager = undefined;
     }
   });
 </script>
