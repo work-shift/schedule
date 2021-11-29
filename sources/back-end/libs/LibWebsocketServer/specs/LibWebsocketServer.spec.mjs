@@ -109,40 +109,40 @@ describe('LibWebsocketServer', function describeLibWebsocketServer() {
     });
   });
 
-  it(`should use the ${Paths.REGISTER} route with fake data`, (done) => {
-    const client = new WebSocket(`ws://${serverConfig.server.host}:${serverConfig.server.port}/register`);
+  // it(`should use the ${Paths.REGISTER} route with fake data`, (done) => {
+  //   const client = new WebSocket(`ws://${serverConfig.server.host}:${serverConfig.server.port}/register`);
 
-    client.binaryType = 'arraybuffer';
+  //   client.binaryType = 'arraybuffer';
 
-    const message = {
-      op: 'register',
-      payload: {
-        email: `${randomUUID()}.${randomUUID()}@example.com`,
-        password: randomUUID(),
-      },
-    };
-    const expectedCloseCode = WebsocketErrorCodes.CLOSE_NORMAL;
-    const expectedCloseReason = 'bye';
+  //   const message = {
+  //     op: 'register',
+  //     payload: {
+  //       email: `${randomUUID()}.${randomUUID()}@example.com`,
+  //       password: randomUUID(),
+  //     },
+  //   };
+  //   const expectedCloseCode = WebsocketErrorCodes.CLOSE_NORMAL;
+  //   const expectedCloseReason = 'bye';
 
-    client.on('open', function clientOpen() {
-      client.send(encoder.encode(JSON.stringify(message)));
-    });
+  //   client.on('open', function clientOpen() {
+  //     client.send(encoder.encode(JSON.stringify(message)));
+  //   });
 
-    client.on('message', function handleClientMessage(binaryMessage) {
-      const messageObject = JSON.parse(decoder.decode(binaryMessage));
+  //   client.on('message', function handleClientMessage(binaryMessage) {
+  //     const messageObject = JSON.parse(decoder.decode(binaryMessage));
 
-      client.close(expectedCloseCode, expectedCloseReason);
+  //     client.close(expectedCloseCode, expectedCloseReason);
 
-      expect(messageObject).to.deep.equal(message);
-    });
+  //     expect(messageObject).to.deep.equal(message);
+  //   });
 
-    client.on('close', function handleClientClose(code = null, reason = null) {
-      expect(code).to.equal(expectedCloseCode);
-      expect(decoder.decode(reason)).to.equal(expectedCloseReason);
+  //   client.on('close', function handleClientClose(code = null, reason = null) {
+  //     expect(code).to.equal(expectedCloseCode);
+  //     expect(decoder.decode(reason)).to.equal(expectedCloseReason);
 
-      done();
-    });
-  });
+  //     done();
+  //   });
+  // });
 
   it(`should use the ${Paths.AUTHENTICATE} route with fake data`, (done) => {
     const client = new WebSocket(`ws://${serverConfig.server.host}:${serverConfig.server.port}/authenticate`);
