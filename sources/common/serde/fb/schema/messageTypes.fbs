@@ -1,0 +1,5 @@
+namespace Schedule;
+
+enum MessageTypes: ubyte {
+  PublicKeyCredentialCreationOptions = 0,
+}
