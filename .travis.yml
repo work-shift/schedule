@@ -8,7 +8,7 @@ before_install:
   # - sudo add-apt-repository -y ppa:redislabs/redis
   # - sudo apt-get -q update && sudo apt-get -y install redis
   - sudo apt-get -y update && sudo apt-get -y upgrade
-  - sudo apt-get -y install flatbuffers
+  - sudo apt install -y flatbuffers-compiler
   - curl https://get.volta.sh | bash
   - volta install node@17.1.0
   - volta install pnpm@6.22.2
