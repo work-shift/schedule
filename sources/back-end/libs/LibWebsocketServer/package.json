@@ -25,8 +25,8 @@
   "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@work-shift/encoding": "workspace:^0.0.7",
-    "@work-shift/lib-websocket-error-codes": "workspace:^0.0.7",
+    "@work-shift/encoding": "workspace:^0.0.0",
+    "@work-shift/lib-websocket-error-codes": "workspace:^0.0.0",
     "fido2-lib": "^2.6.8",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.4.0"
   },

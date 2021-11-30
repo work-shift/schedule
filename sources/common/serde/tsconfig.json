@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "alwaysStrict": false,
+    "module": "esnext",
+    "outDir": "./fb/generated/js",
+    "moduleResolution": "node",
+    "strict": true,
+    "declaration": true,
+    "declarationDir": "./fb/generated/js/types",
+    "declarationMap": true,
+    "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "isolatedModules": true
+  },
+  "include": ["./fb/generated/ts/**/*"],
+}
