@@ -34,4 +34,3 @@ export declare class PublicKeyCredentialCreationOptions {
     static addAttestation(builder: flatbuffers.Builder, attestation: AttestationConveyancePreference): void;
     static endPublicKeyCredentialCreationOptions(builder: flatbuffers.Builder): flatbuffers.Offset;
 }
-//# sourceMappingURL=public-key-credential-creation-options.d.ts.map

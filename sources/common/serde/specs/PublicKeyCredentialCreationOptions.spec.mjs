@@ -21,6 +21,15 @@ import {
 import {
   PublicKeyCredentialCreationOptions,
 } from '../fb/generated/mjs/schedule/public-key-credential-creation-options.mjs';
+import {
+  AuthenticatorAttachment,
+} from '../fb/generated/mjs/schedule/authenticator-attachment.mjs';
+import {
+  ResidentKeyRequirement,
+} from '../fb/generated/mjs/schedule/resident-key-requirement.mjs';
+import {
+  AttestationConveyancePreference,
+} from '../fb/generated/mjs/schedule/attestation-conveyance-preference.mjs';
 
 describe(PublicKeyCredentialCreationOptions.name, function describePublicKeyCredentialCreationOptions() {
   const debuglog = util.debuglog('serde:specs');
@@ -44,14 +53,11 @@ describe(PublicKeyCredentialCreationOptions.name, function describePublicKeyCred
           type: PublicKeyCredentialType.publicKey,
         }],
         authenticatorSelection: {
-          // FIXME: authenticatorAttachment
-          authenticatorAttachment: 'platform',
-          // FIXME: userVerification
-          userVerification: 'required',
+          authenticatorAttachment: AuthenticatorAttachment.platform,
+          userVerification: ResidentKeyRequirement.required,
         },
         timeout: 60000,
-        // FIXME: attestation
-        attestation: 'direct', // direct
+        attestation: AttestationConveyancePreference.direct, // direct
       },
     };
 

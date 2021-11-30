@@ -15,4 +15,3 @@ export declare class Rp {
     static endRp(builder: flatbuffers.Builder): flatbuffers.Offset;
     static createRp(builder: flatbuffers.Builder, idOffset: flatbuffers.Offset, nameOffset: flatbuffers.Offset): flatbuffers.Offset;
 }
-//# sourceMappingURL=rp.d.ts.map

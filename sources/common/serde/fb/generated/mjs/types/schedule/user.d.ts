@@ -25,4 +25,3 @@ export declare class User {
     static endUser(builder: flatbuffers.Builder): flatbuffers.Offset;
     static createUser(builder: flatbuffers.Builder, idOffset: flatbuffers.Offset, nameOffset: flatbuffers.Offset, displayNameOffset: flatbuffers.Offset): flatbuffers.Offset;
 }
-//# sourceMappingURL=user.d.ts.map
