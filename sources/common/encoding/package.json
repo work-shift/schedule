@@ -1,6 +1,6 @@
 {
   "name": "@work-shift/encoding",
-  "version": "0.0.7",
+  "version": "0.0.0",
   "description": "[lib] binary encoding",
   "type": "module",
   "engines": {
