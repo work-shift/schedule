@@ -80,12 +80,6 @@ module.exports = {
     'no-irregular-whitespace': 0,
     'lines-between-class-members': 0,
     'import/no-mutable-exports': 0,
-    'max-len': [
-      'error',
-      {
-        code: 160,
-      },
-    ],
     'no-bitwise': [
       'error',
       {
@@ -104,5 +98,11 @@ module.exports = {
     'no-restricted-syntax': 0,
     'no-return-await': 0,
     'prefer-arrow-callback': 0,
+    'no-underscore-dangle': 0,
+    'no-var': 0,
+    'func-names': 0,
+    'no-shadow': 0,
+    'max-len': 0,
+    'no-plusplus': 0,
   },
 };
