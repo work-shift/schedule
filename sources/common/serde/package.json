@@ -24,10 +24,10 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "./node_modules/.bin/eslint ./ --ext .mjs",
-    "test": "pnpm run lint && NODE_ENV=test NODE_DEBUG=serde:* ./node_modules/.bin/c8 ./node_modules/.bin/mocha",
     "build:fbs": "flatc --ts --gen-all --reflect-types --natural-utf8 -o ./fb/generated/ts ./fb/schema/schedule.fbs",
     "transpile:ts": "./node_modules/.bin/tsc --project ./",
-    "build:schema": "pnpm run build:fbs && pnpm run transpile:ts"
+    "build:schema": "pnpm run build:fbs && pnpm run transpile:ts",
+    "test": "pnpm run build:schema && pnpm run lint && NODE_ENV=test NODE_DEBUG=serde:* ./node_modules/.bin/c8 ./node_modules/.bin/mocha"
   },
   "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
   "license": "MIT",
