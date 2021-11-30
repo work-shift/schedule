@@ -109,6 +109,11 @@ export class PublicKeyCredentialCreationOptions {
   }
   static endPublicKeyCredentialCreationOptions(builder) {
     const offset = builder.endObject();
+    builder.requiredField(offset, 4); // challenge
+    builder.requiredField(offset, 6); // rp
+    builder.requiredField(offset, 8); // user
+    builder.requiredField(offset, 10); // pub_key_cred_params
+    builder.requiredField(offset, 12); // authenticator_selection
     return offset;
   }
 }

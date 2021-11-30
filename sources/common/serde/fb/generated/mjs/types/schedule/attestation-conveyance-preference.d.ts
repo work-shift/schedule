@@ -4,4 +4,3 @@ export declare enum AttestationConveyancePreference {
     indirect = 2,
     enterprise = 3
 }
-//# sourceMappingURL=attestation-conveyance-preference.d.ts.map

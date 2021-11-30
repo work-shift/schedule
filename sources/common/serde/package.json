@@ -21,14 +21,14 @@
     "deserializeMessage.mjs",
     "MessageTypes.mjs"
   ],
-  "types": "./fb/generated/js/types/schedule.d.ts",
+  "types": "./fb/generated/mjs/types/schedule.d.ts",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "./node_modules/.bin/eslint ./ --ext .mjs",
     "rm-rf": "./node_modules/.bin/rimraf ./fb/generated",
     "build:fbs": "pnpm run rm-rf && flatc --ts --gen-all --reflect-types --natural-utf8 -o ./fb/generated/ts ./fb/schema/schedule.fbs",
     "transpile:ts": "./node_modules/.bin/tsc --project ./",
-    "rename:js-to-mjs": "./node_modules/.bin/renamer --verbose --find /\\.js/ --replace .mjs ./fb/generated/mjs/**/*.js",
+    "rename:js-to-mjs": "./node_modules/.bin/renamer --silent --find /\\.js/ --replace .mjs ./fb/generated/mjs/**/*.js",
     "fix:eslint:errors": "./node_modules/.bin/eslint --fix fb/generated/mjs",
     "build:schema": "pnpm run build:fbs && pnpm run transpile:ts && pnpm run rename:js-to-mjs && pnpm run fix:eslint:errors",
     "test": "pnpm run build:schema && pnpm run lint && NODE_ENV=test NODE_DEBUG=serde:* ./node_modules/.bin/c8 ./node_modules/.bin/mocha"

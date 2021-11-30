@@ -62,6 +62,9 @@ export class User {
   }
   static endUser(builder) {
     const offset = builder.endObject();
+    builder.requiredField(offset, 4); // id
+    builder.requiredField(offset, 6); // name
+    builder.requiredField(offset, 8); // display_name
     return offset;
   }
   static createUser(builder, idOffset, nameOffset, displayNameOffset) {

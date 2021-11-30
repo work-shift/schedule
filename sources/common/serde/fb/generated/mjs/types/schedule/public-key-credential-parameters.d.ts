@@ -15,4 +15,3 @@ export declare class PublicKeyCredentialParameters {
     static endPublicKeyCredentialParameters(builder: flatbuffers.Builder): flatbuffers.Offset;
     static createPublicKeyCredentialParameters(builder: flatbuffers.Builder, alg: COSEAlgorithms, type: PublicKeyCredentialType): flatbuffers.Offset;
 }
-//# sourceMappingURL=public-key-credential-parameters.d.ts.map

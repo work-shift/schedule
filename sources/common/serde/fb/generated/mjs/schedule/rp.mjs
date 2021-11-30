@@ -37,6 +37,8 @@ export class Rp {
   }
   static endRp(builder) {
     const offset = builder.endObject();
+    builder.requiredField(offset, 4); // id
+    builder.requiredField(offset, 6); // name
     return offset;
   }
   static createRp(builder, idOffset, nameOffset) {

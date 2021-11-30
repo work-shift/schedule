@@ -8,7 +8,7 @@
     "strict": true,
     "declaration": true,
     "declarationDir": "./fb/generated/mjs/types",
-    "declarationMap": true,
+    "declarationMap": false,
     "preserveConstEnums": true,
     "esModuleInterop": true,
     "isolatedModules": true

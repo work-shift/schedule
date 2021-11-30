@@ -10,4 +10,3 @@ export declare class AuthenticatorSelection {
     static sizeOf(): number;
     static createAuthenticatorSelection(builder: flatbuffers.Builder, authenticator_attachment: AuthenticatorAttachment, user_verification: ResidentKeyRequirement): flatbuffers.Offset;
 }
-//# sourceMappingURL=authenticator-selection.d.ts.map

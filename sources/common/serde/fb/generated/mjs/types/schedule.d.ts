@@ -7,4 +7,3 @@ export { PublicKeyCredentialType } from './schedule/public-key-credential-type';
 export { ResidentKeyRequirement } from './schedule/resident-key-requirement';
 export { Rp } from './schedule/rp';
 export { User } from './schedule/user';
-//# sourceMappingURL=schedule.d.ts.map

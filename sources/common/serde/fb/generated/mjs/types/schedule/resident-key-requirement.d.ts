@@ -3,4 +3,3 @@ export declare enum ResidentKeyRequirement {
     discouraged = 1,
     preferred = 2
 }
-//# sourceMappingURL=resident-key-requirement.d.ts.map
