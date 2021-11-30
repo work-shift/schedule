@@ -31,7 +31,7 @@
     "rename:js-to-mjs": "./node_modules/.bin/renamer --silent --find /\\.js/ --replace .mjs ./fb/generated/mjs/**/*.js",
     "fix:eslint:errors": "./node_modules/.bin/eslint --fix fb/generated/mjs",
     "build:schema": "pnpm run build:fbs && pnpm run transpile:ts && pnpm run rename:js-to-mjs && pnpm run fix:eslint:errors",
-    "test": "pnpm run build:schema && pnpm run lint && NODE_ENV=test NODE_DEBUG=serde:* ./node_modules/.bin/c8 ./node_modules/.bin/mocha"
+    "test": "pnpm run lint && NODE_ENV=test NODE_DEBUG=serde:* ./node_modules/.bin/c8 ./node_modules/.bin/mocha"
   },
   "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
   "license": "MIT",
