@@ -5,10 +5,10 @@ env:
   global:
     - PATH=$HOME/.volta:$HOME/.volta/bin:$PATH
 before_install:
+  # - sudo apt-get -y update && sudo apt-get -y upgrade
   # - sudo add-apt-repository -y ppa:redislabs/redis
-  # - sudo apt-get -q update && sudo apt-get -y install redis
-  - sudo apt-get -y update && sudo apt-get -y upgrade
-  - sudo apt install -y flatbuffers-compiler
+  # - sudo apt-get -y install redis
+  # - sudo apt install -y flatbuffers-compiler
   - curl https://get.volta.sh | bash
   - volta install node@17.1.0
   - volta install pnpm@6.22.2
