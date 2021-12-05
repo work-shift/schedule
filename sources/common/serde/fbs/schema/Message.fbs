@@ -1,0 +1,17 @@
+include "PublicKeyCredentialCreationOptions.fbs";
+include "RegistrationRequest.fbs";
+include "Meta.fbs";
+
+namespace Schedule;
+
+union Payload {
+  PublicKeyCredentialCreationOptions,
+  RegistrationRequest
+}
+
+table Message {
+  meta: Meta;
+  payload: Payload;
+}
+
+root_type Message;

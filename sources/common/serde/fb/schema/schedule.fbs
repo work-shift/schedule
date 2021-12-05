@@ -1,4 +1,0 @@
-include "messageTypes.fbs";
-include "publicKeyCredentialCreationOptions.fbs";
-
-namespace Schedule;
