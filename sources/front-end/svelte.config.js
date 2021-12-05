@@ -1,5 +1,9 @@
 import adapterNode from '@sveltejs/adapter-node';
 
+/*
+  WEB WORKERS related: https://twitter.com/dassurma/status/1467567498837045256?s=12
+*/
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   compilerOptions: {
