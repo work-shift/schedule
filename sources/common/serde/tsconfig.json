@@ -3,15 +3,15 @@
     "target": "es6",
     "alwaysStrict": false,
     "module": "esnext",
-    "outDir": "./fb/generated/mjs",
+    "outDir": "./fbs/generated/mjs",
     "moduleResolution": "node",
     "strict": true,
     "declaration": true,
-    "declarationDir": "./fb/generated/mjs/types",
+    "declarationDir": "./fbs/generated/mjs/types",
     "declarationMap": false,
     "preserveConstEnums": true,
     "esModuleInterop": true,
     "isolatedModules": true
   },
-  "include": ["./fb/generated/ts/**/*"],
+  "include": ["./fbs/generated/ts/**/*"],
 }

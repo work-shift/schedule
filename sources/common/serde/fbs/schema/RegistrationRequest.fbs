@@ -1,0 +1,7 @@
+namespace Schedule;
+
+table RegistrationRequest {
+
+}
+
+root_type RegistrationRequest;

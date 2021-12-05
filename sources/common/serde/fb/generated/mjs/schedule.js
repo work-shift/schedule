@@ -1,9 +1,0 @@
-export { AttestationConveyancePreference } from './schedule/attestation-conveyance-preference.mjs';
-export { AuthenticatorAttachment } from './schedule/authenticator-attachment.mjs';
-export { AuthenticatorSelection } from './schedule/authenticator-selection.mjs';
-export { COSEAlgorithms } from './schedule/c-o-s-e-algorithms.mjs';
-export { PublicKeyCredentialParameters } from './schedule/public-key-credential-parameters.mjs';
-export { PublicKeyCredentialType } from './schedule/public-key-credential-type.mjs';
-export { ResidentKeyRequirement } from './schedule/resident-key-requirement.mjs';
-export { Rp } from './schedule/rp.mjs';
-export { User } from './schedule/user.mjs';

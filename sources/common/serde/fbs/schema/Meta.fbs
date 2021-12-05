@@ -1,0 +1,8 @@
+namespace Schedule;
+
+table Meta {
+  id: string;
+  ts: float64;
+}
+
+root_type Meta;
