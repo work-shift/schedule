@@ -11,7 +11,7 @@ before_install:
   # - sudo apt install -y flatbuffers-compiler
   - curl https://get.volta.sh | bash
   - volta install node@17.1.0
-  - volta install pnpm@6.22.2
+  - volta install pnpm@6.23.6
   - pnpm config set store-dir ~/.pnpm-store
   - curl -Os https://uploader.codecov.io/latest/linux/codecov
   - chmod +x codecov
