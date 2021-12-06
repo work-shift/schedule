@@ -18,7 +18,7 @@ export class MessageSerializer {
       throw new ReferenceError('serializers is undefined');
     }
 
-    if (Object.getOwnPropertyNames(serializers).length === 0) {
+    if (serializers.size === 0) {
       throw new RangeError('serializers is empty');
     }
 
@@ -27,13 +27,9 @@ export class MessageSerializer {
   }
 
   // eslint-disable-next-line class-methods-use-this, no-unused-vars
-  serialize(messageObject = null, objectType = null) {
+  serialize(messageObject = null) {
     if (messageObject === null) {
       throw ReferenceError('messageObject is undefined');
-    }
-
-    if (objectType === null) {
-      throw ReferenceError('objectType is undefined');
     }
 
     this.#debuglog({
@@ -41,20 +37,17 @@ export class MessageSerializer {
       serializers: this.#serializers,
     });
 
-    const serializerId = (Payload[objectType]);
-
     this.#debuglog({
-      serializerId,
-      objectType,
+      serializerId: messageObject.payload.type,
       Payload,
     });
 
-    const serialize = this.#serializers[objectType] ?? (() => {
-      throw new ReferenceError(`no serializer found for ${objectType}`);
+    const serialize = this.#serializers.get(messageObject.payload.type) ?? (() => {
+      throw new ReferenceError(`no serializer found for ${messageObject.payload.type}`);
     });
 
-    const payloadOffset = serialize(this.#builder, messageObject.payload, this.#debuglog);
+    delete messageObject.payload.type;
 
-    return payloadOffset;
+    return serialize(this.#builder, messageObject.payload, this.#debuglog);
   }
 }

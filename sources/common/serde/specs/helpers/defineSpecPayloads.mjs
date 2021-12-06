@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import {
   randomUUID,
 } from 'node:crypto';
@@ -21,10 +22,15 @@ import {
 } from '../../fbs/generated/mjs/schedule/attestation-conveyance-preference.mjs';
 
 // eslint-disable-next-line no-unused-vars
-const defineRegistrationRequestClass = () => ({});
+const defineRegistrationRequestClass = () => ({
+  type: Payload.RegistrationRequest,
+});
+
 // eslint-disable-next-line no-unused-vars
 const definePublicKeyCredentialCreationOptionsClass = () => {
-  const publicKeyCredentialCreationOptions = {};
+  const publicKeyCredentialCreationOptions = {
+    type: Payload.PublicKeyCredentialCreationOptions.constructor.name,
+  };
 
   publicKeyCredentialCreationOptions.challenge = Uint8Array.from(randomUUID());
   publicKeyCredentialCreationOptions.rp = {
@@ -53,10 +59,9 @@ const definePublicKeyCredentialCreationOptionsClass = () => {
 export const defineSpecPayloads = () => {
   const result = [];
 
-  result.push({
-    type: Payload.RegistrationRequest,
-    value: defineRegistrationRequestClass(),
-  });
+  result.push(
+    defineRegistrationRequestClass(),
+  );
   // result.push({
   //   value: definePublicKeyCredentialCreationOptionsClass(),
   //   type: PublicKeyCredentialCreationOptionsClass,
