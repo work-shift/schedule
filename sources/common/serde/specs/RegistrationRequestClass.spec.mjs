@@ -10,9 +10,6 @@ import {
   inspectlog,
 } from '@work-shift/node-inspectlog/inspectlog.mjs';
 import {
-  RegistrationRequestClass,
-} from '../fbs/api/helpers/ClassRegistry/RegistrationRequestClass.mjs';
-import {
   serialize as serializeRegistrationRequestClass,
   BINARY_LENGTH,
 } from '../fbs/api/RegistrationRequest/serialize.mjs';
@@ -20,15 +17,15 @@ import {
   deserialize as deserializeRegistrationRequestClass,
 } from '../fbs/api/RegistrationRequest/deserialize.mjs';
 
-describe(RegistrationRequestClass.name, function describePublicKeyCredentialCreationOptions() {
+describe('RegistrationRequest', function describePublicKeyCredentialCreationOptions() {
   let log = () => {};
 
   before(() => {
     log = inspectlog('serde:specs');
   });
 
-  it(`should serialize/deserialize ${RegistrationRequestClass.name}`, async function shouldSerializeMessage() {
-    const registrationRequestClass = new RegistrationRequestClass();
+  it('should serialize/deserialize RegistrationRequest', async function shouldSerializeMessage() {
+    const registrationRequestClass = {};
     const serializedRegistrationRequestClass = serializeRegistrationRequestClass(
       registrationRequestClass,
       log,
@@ -39,6 +36,6 @@ describe(RegistrationRequestClass.name, function describePublicKeyCredentialCrea
 
     const deserializedRegistrationRequestClass = deserializeRegistrationRequestClass(serializedRegistrationRequestClass, log);
 
-    return expect(deserializedRegistrationRequestClass).to.be.instanceof(RegistrationRequestClass);
+    return expect(deserializedRegistrationRequestClass).to.exist;
   });
 });

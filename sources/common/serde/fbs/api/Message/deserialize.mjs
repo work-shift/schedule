@@ -1,8 +1,5 @@
 import flatbuffers from 'flatbuffers';
 import {
-  MessageClass,
-} from '../helpers/ClassRegistry/MessageClass.mjs';
-import {
   Message,
 } from '../../generated/mjs/schedule/message.mjs';
 
@@ -15,7 +12,7 @@ export const deserialize = (MessageBuffer = null, debuglog = () => {}) => {
   const buffer = new flatbuffers.ByteBuffer(MessageBuffer);
   // eslint-disable-next-line no-unused-vars
   const message = Message.getRootAsMessage(buffer);
-  const result = new MessageClass();
+  const result = {};
 
   return Object.freeze(result);
 };

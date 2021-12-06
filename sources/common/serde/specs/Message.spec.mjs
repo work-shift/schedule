@@ -13,9 +13,6 @@ import {
   inspectlog,
 } from '@work-shift/node-inspectlog/inspectlog.mjs';
 import {
-  MessageClass,
-} from '../fbs/api/helpers/ClassRegistry/MessageClass.mjs';
-import {
   serialize as serializeMessageClass,
 } from '../fbs/api/Message/serialize.mjs';
 // import {
@@ -25,7 +22,7 @@ import {
   defineSpecPayloads,
 } from './helpers/defineSpecPayloads.mjs';
 
-describe(MessageClass.name, function describePublicKeyCredentialCreationOptions() {
+describe('Message', function describePublicKeyCredentialCreationOptions() {
   let log = () => {};
   const payloads = defineSpecPayloads();
 
@@ -71,11 +68,11 @@ describe(MessageClass.name, function describePublicKeyCredentialCreationOptions(
     log = inspectlog('serde:specs');
   });
 
-  it.only(`should serialize/deserialize ${MessageClass.name}`, async function shouldSerializeMessage() {
+  it('should serialize/deserialize Message', async function shouldSerializeMessage() {
     const sizeReports = [];
 
     for (const payload of payloads) {
-      const messageClass = new MessageClass();
+      const messageClass = {};
 
       messageClass.meta = {
         id: randomUUID(),

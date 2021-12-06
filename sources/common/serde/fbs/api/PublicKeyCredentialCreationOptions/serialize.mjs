@@ -14,9 +14,6 @@ import {
 import {
   AuthenticatorSelection,
 } from '../../generated/mjs/schedule/authenticator-selection.mjs';
-import {
-  PublicKeyCredentialCreationOptionsClass,
-} from '../helpers/ClassRegistry/PublicKeyCredentialCreationOptionsClass.mjs';
 
 const define_challenge = (
   builder = null,
@@ -64,10 +61,6 @@ export const serialize = (PublicKeyCredentialCreationOptionsObject = null, debug
     throw new ReferenceError('PublicKeyCredentialCreationOptionsObject is undefined');
   }
 
-  if (PublicKeyCredentialCreationOptionsObject instanceof PublicKeyCredentialCreationOptionsClass === false) {
-    throw new TypeError(`PublicKeyCredentialCreationOptionsObject is not an instance of ${PublicKeyCredentialCreationOptionsClass.name}`);
-  }
-
   const builder = new flatbuffers.Builder();
 
   const challenge_offset = define_challenge(builder, PublicKeyCredentialCreationOptionsObject, debuglog);
@@ -88,6 +81,7 @@ export const serialize = (PublicKeyCredentialCreationOptionsObject = null, debug
   PublicKeyCredentialCreationOptions.addTimeout(builder, PublicKeyCredentialCreationOptionsObject.timeout);
   PublicKeyCredentialCreationOptions.addAttestation(builder, PublicKeyCredentialCreationOptionsObject.attestation);
 
+  // FIXME: only the offset should actually be returned.
   const result_offset = PublicKeyCredentialCreationOptions.endPublicKeyCredentialCreationOptions(builder);
 
   builder.finish(result_offset);
