@@ -13,9 +13,6 @@ import {
   inspectlog,
 } from '@work-shift/node-inspectlog/inspectlog.mjs';
 import {
-  MetaClass,
-} from '../fbs/api/helpers/ClassRegistry/MetaClass.mjs';
-import {
   serialize as serializeMetaClass,
   BINARY_LENGTH,
 } from '../fbs/api/Meta/serialize.mjs';
@@ -23,15 +20,15 @@ import {
   deserialize as deserializeMetaClass,
 } from '../fbs/api/Meta/deserialize.mjs';
 
-describe(MetaClass.name, function describePublicKeyCredentialCreationOptions() {
+describe('Meta', function describePublicKeyCredentialCreationOptions() {
   let log = () => {};
 
   before(() => {
     log = inspectlog('serde:specs');
   });
 
-  it(`should serialize/deserialize ${MetaClass.name}`, async function shouldSerializeMessage() {
-    const metaClass = new MetaClass();
+  it('should serialize/deserialize Meta', async function shouldSerializeMessage() {
+    const metaClass = {};
 
     metaClass.id = randomUUID();
     metaClass.ts = Date.now();
@@ -46,7 +43,6 @@ describe(MetaClass.name, function describePublicKeyCredentialCreationOptions() {
 
     const deserializedMetaClass = deserializeMetaClass(serializedMetaClass, log);
 
-    expect(deserializedMetaClass).to.be.instanceof(MetaClass);
     expect(deserializedMetaClass).to.deep.equal(metaClass);
   });
 });

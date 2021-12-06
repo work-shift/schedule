@@ -2,9 +2,6 @@ import flatbuffers from 'flatbuffers';
 import {
   PublicKeyCredentialCreationOptions,
 } from '../../generated/mjs/schedule/public-key-credential-creation-options.mjs';
-import {
-  PublicKeyCredentialCreationOptionsClass,
-} from '../helpers/ClassRegistry/PublicKeyCredentialCreationOptionsClass.mjs';
 
 // eslint-disable-next-line no-unused-vars
 export const deserialize = (PublicKeyCredentialCreationOptionsBuffer = null, debuglog = () => {}) => {
@@ -14,7 +11,7 @@ export const deserialize = (PublicKeyCredentialCreationOptionsBuffer = null, deb
 
   const buffer = new flatbuffers.ByteBuffer(PublicKeyCredentialCreationOptionsBuffer);
   const publicKeyCredentialCreationOptions = PublicKeyCredentialCreationOptions.getRootAsPublicKeyCredentialCreationOptions(buffer);
-  const result = new PublicKeyCredentialCreationOptionsClass();
+  const result = {};
 
   result.challenge = publicKeyCredentialCreationOptions.challengeArray();
   result.rp = {

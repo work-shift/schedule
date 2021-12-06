@@ -33,19 +33,16 @@ import {
 import {
   AttestationConveyancePreference,
 } from '../fbs/generated/mjs/schedule/attestation-conveyance-preference.mjs';
-import {
-  PublicKeyCredentialCreationOptionsClass,
-} from '../fbs/api/helpers/ClassRegistry/PublicKeyCredentialCreationOptionsClass.mjs';
 
-describe(PublicKeyCredentialCreationOptionsClass.name, function describePublicKeyCredentialCreationOptions() {
+describe('PublicKeyCredentialCreationOptions', function describePublicKeyCredentialCreationOptions() {
   let log = () => {};
 
   before(() => {
     log = inspectlog('serde:specs');
   });
 
-  it(`should serialize/deserialize ${PublicKeyCredentialCreationOptionsClass.name}`, async function shouldSerializeMessage() {
-    const publicKeyCredentialCreationOptions = new PublicKeyCredentialCreationOptionsClass();
+  it('should serialize/deserialize PublicKeyCredentialCreationOptions', async function shouldSerializeMessage() {
+    const publicKeyCredentialCreationOptions = {};
 
     publicKeyCredentialCreationOptions.challenge = Uint8Array.from(randomUUID());
     publicKeyCredentialCreationOptions.rp = {
@@ -80,6 +77,6 @@ describe(PublicKeyCredentialCreationOptionsClass.name, function describePublicKe
       log,
     );
 
-    expect(deserializedPublicKeyCredentialCreationOptionsClass).to.be.instanceof(PublicKeyCredentialCreationOptionsClass);
+    expect(deserializedPublicKeyCredentialCreationOptionsClass).to.exist;
   });
 });

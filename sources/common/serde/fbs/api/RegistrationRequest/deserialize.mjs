@@ -2,9 +2,6 @@ import flatbuffers from 'flatbuffers';
 import {
   RegistrationRequest,
 } from '../../generated/mjs/schedule/registration-request.mjs';
-import {
-  RegistrationRequestClass,
-} from '../helpers/ClassRegistry/RegistrationRequestClass.mjs';
 
 // eslint-disable-next-line no-unused-vars
 export const deserialize = (RegistrationRequestBuffer = null, debuglog = () => {}) => {
@@ -16,7 +13,7 @@ export const deserialize = (RegistrationRequestBuffer = null, debuglog = () => {
   // eslint-disable-next-line no-unused-vars
   const registrationRequest = RegistrationRequest.getRootAsRegistrationRequest(buffer);
 
-  const result = new RegistrationRequestClass();
+  const result = {};
 
   return Object.freeze(result);
 };

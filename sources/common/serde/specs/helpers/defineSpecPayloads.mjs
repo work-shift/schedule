@@ -2,11 +2,8 @@ import {
   randomUUID,
 } from 'node:crypto';
 import {
-  RegistrationRequestClass,
-} from '../../fbs/api/helpers/ClassRegistry/RegistrationRequestClass.mjs';
-import {
-  PublicKeyCredentialCreationOptionsClass,
-} from '../../fbs/api/helpers/ClassRegistry/PublicKeyCredentialCreationOptionsClass.mjs';
+  Payload,
+} from '../../fbs/generated/mjs/schedule/payload.mjs';
 import {
   COSEAlgorithms,
 } from '../../fbs/generated/mjs/schedule/c-o-s-e-algorithms.mjs';
@@ -24,10 +21,10 @@ import {
 } from '../../fbs/generated/mjs/schedule/attestation-conveyance-preference.mjs';
 
 // eslint-disable-next-line no-unused-vars
-const defineRegistrationRequestClass = () => new RegistrationRequestClass();
+const defineRegistrationRequestClass = () => ({});
 // eslint-disable-next-line no-unused-vars
 const definePublicKeyCredentialCreationOptionsClass = () => {
-  const publicKeyCredentialCreationOptions = new PublicKeyCredentialCreationOptionsClass();
+  const publicKeyCredentialCreationOptions = {};
 
   publicKeyCredentialCreationOptions.challenge = Uint8Array.from(randomUUID());
   publicKeyCredentialCreationOptions.rp = {
@@ -57,13 +54,13 @@ export const defineSpecPayloads = () => {
   const result = [];
 
   result.push({
+    type: Payload.RegistrationRequest,
     value: defineRegistrationRequestClass(),
-    type: RegistrationRequestClass,
   });
-  result.push({
-    value: definePublicKeyCredentialCreationOptionsClass(),
-    type: PublicKeyCredentialCreationOptionsClass,
-  });
+  // result.push({
+  //   value: definePublicKeyCredentialCreationOptionsClass(),
+  //   type: PublicKeyCredentialCreationOptionsClass,
+  // });
 
   return result.slice();
 };

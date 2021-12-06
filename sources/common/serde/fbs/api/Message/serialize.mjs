@@ -1,8 +1,5 @@
 import flatbuffers from 'flatbuffers';
 import {
-  MessageClass,
-} from '../helpers/ClassRegistry/MessageClass.mjs';
-import {
   Message,
 } from '../../generated/mjs/schedule/message.mjs';
 import {
@@ -11,12 +8,6 @@ import {
 import {
   Payload,
 } from '../../generated/mjs/schedule/payload.mjs';
-import {
-  RegistrationRequestClass,
-} from '../helpers/ClassRegistry/RegistrationRequestClass.mjs';
-import {
-  PublicKeyCredentialCreationOptionsClass,
-} from '../helpers/ClassRegistry/PublicKeyCredentialCreationOptionsClass.mjs';
 import {
   RegistrationRequest,
 } from '../../generated/mjs/schedule/registration-request.mjs';
@@ -41,15 +32,17 @@ const resolvePayloadType = (payload = null) => {
     throw new ReferenceError('payload is undefined');
   }
 
-  if (payload instanceof RegistrationRequestClass === true) {
-    return Payload.RegistrationRequest;
+  switch (payload.constructor.name) {
+    case RegistrationRequest.constructor.name: {
+      return Payload.RegistrationRequest;
+    }
+    case PublicKeyCredentialCreationOptions.constructor.name: {
+      return Payload.PublicKeyCredentialCreationOptions;
+    }
+    default: {
+      throw new TypeError('unknown payload type', payload);
+    }
   }
-
-  if (payload instanceof PublicKeyCredentialCreationOptionsClass === true) {
-    return Payload.PublicKeyCredentialCreationOptions;
-  }
-
-  throw new TypeError('unknown payload type', payload);
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -130,10 +123,6 @@ const resolveSerializerByPayloadType = (builder = null, payloadType = null, debu
 export const serialize = (MessageObject = null, debuglog = () => {}) => {
   if (MessageObject === null) {
     throw new ReferenceError('MessageObject is undefined');
-  }
-
-  if (MessageObject instanceof MessageClass === false) {
-    throw new TypeError(`MessageObject is not an instance of ${MessageClass.name}`);
   }
 
   const builder = new flatbuffers.Builder();

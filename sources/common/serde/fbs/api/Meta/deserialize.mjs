@@ -1,8 +1,5 @@
 import flatbuffers from 'flatbuffers';
 import {
-  MetaClass,
-} from '../helpers/ClassRegistry/MetaClass.mjs';
-import {
   Meta,
 } from '../../generated/mjs/schedule/meta.mjs';
 
@@ -14,7 +11,7 @@ export const deserialize = (MetaBuffer = null, debuglog = () => {}) => {
 
   const buffer = new flatbuffers.ByteBuffer(MetaBuffer);
   const meta = Meta.getRootAsMeta(buffer);
-  const result = new MetaClass();
+  const result = {};
 
   result.id = meta.id();
   result.ts = meta.ts();
