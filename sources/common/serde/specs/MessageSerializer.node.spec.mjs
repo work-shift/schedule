@@ -52,23 +52,30 @@ describe(MessageSerializer.name, function describeMessageSerializer() {
   });
 
   it.only('should serialize/deserialize messages', async function useMessageSerializer() {
-    const serializers = {
-      [Payload.RegistrationRequest]: serializeRegistrationRequest,
-    };
+    const serializers = new Map([
+      [
+        Payload.RegistrationRequest,
+        serializeRegistrationRequest,
+      ],
+    ]);
 
     for (const payload of payloads) {
       const messageSerializer = new MessageSerializer(builder, serializers, log);
-      const messageClass = {
+      const messageObject = {
         meta: {
           id: randomUUID(),
           ts: Date.now(),
         },
-        payload: payload.value,
+        payload,
       };
 
-      const serializedMessageClass = messageSerializer.serialize(messageClass, Payload.RegistrationRequest);
+      const serializedMessageClassOffset = messageSerializer.serialize(messageObject);
 
-      expect(serializedMessageClass).to.exist;
+      log({
+        serializedMessageClassOffset,
+      });
+
+      expect(serializedMessageClassOffset).to.exist;
     }
   });
 });
