@@ -49,7 +49,7 @@ describe(MessageSerializer.name, function describeMessageSerializer() {
     builder = null;
   });
 
-  it.only('should serialize/deserialize messages', async function useMessageSerializer() {
+  it('should serialize/deserialize messages', async function useMessageSerializer() {
     const serializers = new Map([
       [
         Payload.RegistrationRequest,
