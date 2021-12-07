@@ -56,13 +56,13 @@ importers:
       fido2-lib: ^2.6.8
       mocha: ^9.1.3
       mocha-lcov-reporter: ^1.3.0
-      uWebSockets.js: github:uNetworking/uWebSockets.js#v20.4.0
+      uWebSockets.js: github:uNetworking/uWebSockets.js#v20.5.0
       ws: ^8.3.0
     dependencies:
       '@work-shift/encoding': link:../../../common/encoding
       '@work-shift/lib-websocket-error-codes': link:../../../common/WebsocketErrorCodes
       fido2-lib: 2.6.8
-      uWebSockets.js: github.com/uNetworking/uWebSockets.js/65f39bdff763be3883e6cf18e433dd4fec155845
+      uWebSockets.js: github.com/uNetworking/uWebSockets.js/03ee82eb119f2741665e0ff242efc7299acdfa07
     devDependencies:
       c8: 7.10.0
       chai: 4.3.4
@@ -5819,8 +5819,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/uNetworking/uWebSockets.js/65f39bdff763be3883e6cf18e433dd4fec155845:
-    resolution: {tarball: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/65f39bdff763be3883e6cf18e433dd4fec155845}
+  github.com/uNetworking/uWebSockets.js/03ee82eb119f2741665e0ff242efc7299acdfa07:
+    resolution: {tarball: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/03ee82eb119f2741665e0ff242efc7299acdfa07}
     name: uWebSockets.js
-    version: 20.4.0
+    version: 20.5.0
     dev: false
