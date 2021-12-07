@@ -21,12 +21,10 @@ import {
   AttestationConveyancePreference,
 } from '../../fbs/generated/mjs/schedule/attestation-conveyance-preference.mjs';
 
-// eslint-disable-next-line no-unused-vars
 const defineRegistrationRequestClass = () => ({
   type: Payload.RegistrationRequest,
 });
 
-// eslint-disable-next-line no-unused-vars
 const definePublicKeyCredentialCreationOptionsClass = () => {
   const publicKeyCredentialCreationOptions = {
     type: Payload.PublicKeyCredentialCreationOptions,

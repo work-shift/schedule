@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
   randomUUID,
 } from 'node:crypto';
@@ -93,6 +92,7 @@ describe(`${MessageSerializer.name} and ${MessageDeSerializer.name}`, function d
 
       expect(deserializedMessage).to.exist;
       expect(deserializedMessage).to.not.be.empty;
+      expect(deserializedMessage).to.be.frozen;
       expect(deserializedMessage).to.deep.equal(messageObject);
     }
   });
