@@ -29,7 +29,7 @@ const defineRegistrationRequestClass = () => ({
 // eslint-disable-next-line no-unused-vars
 const definePublicKeyCredentialCreationOptionsClass = () => {
   const publicKeyCredentialCreationOptions = {
-    type: Payload.PublicKeyCredentialCreationOptions.constructor.name,
+    type: Payload.PublicKeyCredentialCreationOptions,
   };
 
   publicKeyCredentialCreationOptions.challenge = Uint8Array.from(randomUUID());
@@ -61,11 +61,8 @@ export const defineSpecPayloads = () => {
 
   result.push(
     defineRegistrationRequestClass(),
+    // definePublicKeyCredentialCreationOptionsClass(),
   );
-  // result.push({
-  //   value: definePublicKeyCredentialCreationOptionsClass(),
-  //   type: PublicKeyCredentialCreationOptionsClass,
-  // });
 
   return result.slice();
 };

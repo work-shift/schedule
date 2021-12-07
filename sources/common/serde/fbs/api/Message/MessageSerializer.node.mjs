@@ -1,6 +1,9 @@
 import {
-  Payload,
-} from '../../generated/mjs/schedule/payload.mjs';
+  Meta,
+} from '../../generated/mjs/schedule/meta.mjs';
+import {
+  Message,
+} from '../../generated/mjs/schedule/message.mjs';
 
 export class MessageSerializer {
   #builder = null;
@@ -37,17 +40,27 @@ export class MessageSerializer {
       serializers: this.#serializers,
     });
 
-    this.#debuglog({
-      serializerId: messageObject.payload.type,
-      Payload,
-    });
+    if (this.#serializers.has(messageObject.payload.type) === true) {
+      const serialize = this.#serializers.get(messageObject.payload.type);
 
-    const serialize = this.#serializers.get(messageObject.payload.type) ?? (() => {
-      throw new ReferenceError(`no serializer found for ${messageObject.payload.type}`);
-    });
+      const metaOffset = Meta.createMeta(
+        this.#builder,
+        this.#builder.createString(messageObject.meta.id),
+        messageObject.meta.ts,
+      );
+      const payloadOffset = serialize(this.#builder, messageObject.payload, this.#debuglog);
+      const resultOffset = Message.createMessage(
+        this.#builder,
+        metaOffset,
+        messageObject.payload.type,
+        payloadOffset,
+      );
 
-    delete messageObject.payload.type;
+      this.#builder.finish(resultOffset);
 
-    return serialize(this.#builder, messageObject.payload, this.#debuglog);
+      return this.#builder.asUint8Array();
+    }
+
+    throw new ReferenceError(`no serializer found for ${messageObject.payload.type}`);
   }
 }
