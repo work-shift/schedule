@@ -1,7 +1,4 @@
 import flatbuffers from 'flatbuffers';
-// import {
-//   Meta,
-// } from '../../generated/mjs/schedule/meta.mjs';
 import {
   Message,
 } from '../../../fbs/generated/mjs/schedule/message.mjs';
