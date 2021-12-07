@@ -1,38 +1,39 @@
-import flatbuffers from 'flatbuffers';
 import {
   PublicKeyCredentialCreationOptions,
 } from '../../generated/mjs/schedule/public-key-credential-creation-options.mjs';
 
 // eslint-disable-next-line no-unused-vars
-export const deserialize = (PublicKeyCredentialCreationOptionsBuffer = null, debuglog = () => {}) => {
-  if (PublicKeyCredentialCreationOptionsBuffer === null) {
-    throw new ReferenceError('PublicKeyCredentialCreationOptionsBuffer is undefined');
+export const deserialize = (message = null, debuglog = () => {}) => {
+  if (message === null) {
+    throw new ReferenceError('message is undefined');
   }
 
-  const buffer = new flatbuffers.ByteBuffer(PublicKeyCredentialCreationOptionsBuffer);
-  const publicKeyCredentialCreationOptions = PublicKeyCredentialCreationOptions.getRootAsPublicKeyCredentialCreationOptions(buffer);
-  const result = {};
+  const payloadType = message.payloadType();
+  const publicKeyCredentialCreationOptions = message.payload(new PublicKeyCredentialCreationOptions());
+  const payload = {
+    type: payloadType,
+  };
 
-  result.challenge = publicKeyCredentialCreationOptions.challengeArray();
-  result.rp = {
+  payload.challenge = publicKeyCredentialCreationOptions.challengeArray();
+  payload.rp = {
     id: publicKeyCredentialCreationOptions.rp().id(),
     name: publicKeyCredentialCreationOptions.rp().name(),
   };
-  result.user = {
+  payload.user = {
     id: Uint8Array.from(publicKeyCredentialCreationOptions.user().idArray()),
     name: publicKeyCredentialCreationOptions.user().name(),
     displayName: publicKeyCredentialCreationOptions.user().displayName(),
   };
-  result.pubKeyCredParams = [{
+  payload.pubKeyCredParams = [{
     alg: publicKeyCredentialCreationOptions.pubKeyCredParams().alg(),
     type: publicKeyCredentialCreationOptions.pubKeyCredParams().type(),
   }];
-  result.authenticatorSelection = {
+  payload.authenticatorSelection = {
     authenticatorAttachment: publicKeyCredentialCreationOptions.authenticatorSelection().authenticatorAttachment(),
     userVerification: publicKeyCredentialCreationOptions.authenticatorSelection().userVerification(),
   };
-  result.timeout = publicKeyCredentialCreationOptions.timeout();
-  result.attestation = publicKeyCredentialCreationOptions.attestation();
+  payload.timeout = publicKeyCredentialCreationOptions.timeout();
+  payload.attestation = publicKeyCredentialCreationOptions.attestation();
 
-  return Object.freeze(result);
+  return payload;
 };

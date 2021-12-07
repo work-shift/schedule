@@ -32,13 +32,8 @@ export class MessageSerializer {
   // eslint-disable-next-line class-methods-use-this, no-unused-vars
   serialize(messageObject = null) {
     if (messageObject === null) {
-      throw ReferenceError('messageObject is undefined');
+      throw new ReferenceError('messageObject is undefined');
     }
-
-    this.#debuglog({
-      messageObject,
-      serializers: this.#serializers,
-    });
 
     if (this.#serializers.has(messageObject.payload.type) === true) {
       const serialize = this.#serializers.get(messageObject.payload.type);
