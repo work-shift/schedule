@@ -60,7 +60,7 @@ export const defineSpecPayloads = () => {
   const result = [];
 
   result.push(
-    // defineRegistrationRequestClass(),
+    defineRegistrationRequestClass(),
     definePublicKeyCredentialCreationOptionsClass(),
   );
 

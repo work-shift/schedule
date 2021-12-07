@@ -5,9 +5,7 @@ import {
 import {
   describe,
   before,
-  beforeEach,
   it,
-  afterEach,
 } from 'mocha';
 import {
   expect,
@@ -43,20 +41,13 @@ import {
 
 describe(`${MessageSerializer.name} and ${MessageDeSerializer.name}`, function describeMessageSerializer() {
   let log = () => {};
-  // let builder = null;
+  let builder = null;
 
   const payloads = defineSpecPayloads();
 
   before(function doBefore() {
     log = inspectlog('serde:specs');
-  });
-
-  beforeEach(function doBeforeEach() {
-    // builder = new flatbuffers.Builder();
-  });
-
-  afterEach(function doAfterEach() {
-    // builder = null;
+    builder = new flatbuffers.Builder();
   });
 
   it('should serialize/deserialize messages', async function useMessageSerializer() {
@@ -82,7 +73,6 @@ describe(`${MessageSerializer.name} and ${MessageDeSerializer.name}`, function d
     ]);
 
     for (const payload of payloads) {
-      const builder = new flatbuffers.Builder();
       const messageSerializer = new MessageSerializer(builder, serializers, log);
       const messageObject = {
         meta: {
