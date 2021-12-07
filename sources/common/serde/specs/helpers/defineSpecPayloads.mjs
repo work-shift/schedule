@@ -61,7 +61,7 @@ export const defineSpecPayloads = () => {
 
   result.push(
     defineRegistrationRequestClass(),
-    // definePublicKeyCredentialCreationOptionsClass(),
+    definePublicKeyCredentialCreationOptionsClass(),
   );
 
   return result.slice();

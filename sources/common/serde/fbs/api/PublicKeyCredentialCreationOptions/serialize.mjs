@@ -1,4 +1,3 @@
-import flatbuffers from 'flatbuffers';
 import {
   PublicKeyCredentialCreationOptions,
 } from '../../generated/mjs/schedule/public-key-credential-creation-options.mjs';
@@ -56,12 +55,14 @@ const define_pub_key_cred_params = (builder = null, sourceObject = null, debuglo
 };
 
 // eslint-disable-next-line no-unused-vars
-export const serialize = (PublicKeyCredentialCreationOptionsObject = null, debuglog = () => {}) => {
-  if (PublicKeyCredentialCreationOptionsObject === null) {
+export const serialize = (builder = null, PublicKeyCredentialCreationOptionsObject = null, debuglog = () => {}) => {
+  if (builder === null) {
     throw new ReferenceError('PublicKeyCredentialCreationOptionsObject is undefined');
   }
 
-  const builder = new flatbuffers.Builder();
+  if (PublicKeyCredentialCreationOptionsObject === null) {
+    throw new ReferenceError('PublicKeyCredentialCreationOptionsObject is undefined');
+  }
 
   const challenge_offset = define_challenge(builder, PublicKeyCredentialCreationOptionsObject, debuglog);
   const rp_offset = define_rp(builder, PublicKeyCredentialCreationOptionsObject, debuglog);
@@ -81,10 +82,5 @@ export const serialize = (PublicKeyCredentialCreationOptionsObject = null, debug
   PublicKeyCredentialCreationOptions.addTimeout(builder, PublicKeyCredentialCreationOptionsObject.timeout);
   PublicKeyCredentialCreationOptions.addAttestation(builder, PublicKeyCredentialCreationOptionsObject.attestation);
 
-  // FIXME: only the offset should actually be returned.
-  const result_offset = PublicKeyCredentialCreationOptions.endPublicKeyCredentialCreationOptions(builder);
-
-  builder.finish(result_offset);
-
-  return builder.asUint8Array();
+  return PublicKeyCredentialCreationOptions.endPublicKeyCredentialCreationOptions(builder);
 };

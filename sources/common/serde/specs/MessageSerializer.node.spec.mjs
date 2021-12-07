@@ -27,17 +27,15 @@ import {
 import {
   serialize as serializeRegistrationRequest,
 } from '../fbs/api/RegistrationRequest/serialize.mjs';
+import {
+  serialize as serializePublicKeyCredentialCreationOptionsObject,
+} from '../fbs/api/PublicKeyCredentialCreationOptions/serialize.mjs';
 
 describe(MessageSerializer.name, function describeMessageSerializer() {
   let log = () => {};
   let builder = null;
-  const payloads = defineSpecPayloads();
-  // const serializers = {
-  //   [Payload.RegistrationRequest]: (payload = null) => {
 
-  //   },
-  //   // [Payload.PublicKeyCredentialCreationOptions]: (payload = null) => {},
-  // };
+  const payloads = defineSpecPayloads();
 
   before(function doBefore() {
     log = inspectlog('serde:specs');
@@ -56,6 +54,10 @@ describe(MessageSerializer.name, function describeMessageSerializer() {
       [
         Payload.RegistrationRequest,
         serializeRegistrationRequest,
+      ],
+      [
+        Payload.PublicKeyCredentialCreationOptions,
+        serializePublicKeyCredentialCreationOptionsObject,
       ],
     ]);
 
