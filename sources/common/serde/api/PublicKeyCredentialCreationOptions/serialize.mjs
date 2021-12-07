@@ -1,18 +1,18 @@
 import {
   PublicKeyCredentialCreationOptions,
-} from '../../generated/mjs/schedule/public-key-credential-creation-options.mjs';
+} from '../../fbs/generated/mjs/schedule/public-key-credential-creation-options.mjs';
 import {
   Rp,
-} from '../../generated/mjs/schedule/rp.mjs';
+} from '../../fbs/generated/mjs/schedule/rp.mjs';
 import {
   User,
-} from '../../generated/mjs/schedule/user.mjs';
+} from '../../fbs/generated/mjs/schedule/user.mjs';
 import {
   PublicKeyCredentialParameters,
-} from '../../generated/mjs/schedule/public-key-credential-parameters.mjs';
+} from '../../fbs/generated/mjs/schedule/public-key-credential-parameters.mjs';
 import {
   AuthenticatorSelection,
-} from '../../generated/mjs/schedule/authenticator-selection.mjs';
+} from '../../fbs/generated/mjs/schedule/authenticator-selection.mjs';
 
 // eslint-disable-next-line no-unused-vars
 const define_challenge = (builder = null, sourceObject = null, debuglog = () => {}) => PublicKeyCredentialCreationOptions.createChallengeVector(

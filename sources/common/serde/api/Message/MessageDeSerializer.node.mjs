@@ -4,7 +4,7 @@ import flatbuffers from 'flatbuffers';
 // } from '../../generated/mjs/schedule/meta.mjs';
 import {
   Message,
-} from '../../generated/mjs/schedule/message.mjs';
+} from '../../fbs/generated/mjs/schedule/message.mjs';
 
 export class MessageDeSerializer {
   #builder = null;

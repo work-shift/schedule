@@ -1,6 +1,6 @@
 import {
   PublicKeyCredentialCreationOptions,
-} from '../../generated/mjs/schedule/public-key-credential-creation-options.mjs';
+} from '../../fbs/generated/mjs/schedule/public-key-credential-creation-options.mjs';
 
 // eslint-disable-next-line no-unused-vars
 export const deserialize = (message = null, debuglog = () => {}) => {

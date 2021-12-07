@@ -1,6 +1,6 @@
 import {
   RegistrationRequest,
-} from '../../generated/mjs/schedule/registration-request.mjs';
+} from '../../fbs/generated/mjs/schedule/registration-request.mjs';
 
 // eslint-disable-next-line no-unused-vars
 export const serialize = (builder = null, RegistrationRequestObject = null, debuglog = () => {}) => {
