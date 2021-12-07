@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   randomUUID,
 } from 'node:crypto';
@@ -19,6 +20,9 @@ import {
   MessageSerializer,
 } from '../fbs/api/Message/MessageSerializer.node.mjs';
 import {
+  MessageDeSerializer,
+} from '../fbs/api/Message/MessageDeSerializer.node.mjs';
+import {
   defineSpecPayloads,
 } from './helpers/defineSpecPayloads.mjs';
 import {
@@ -28,12 +32,18 @@ import {
   serialize as serializeRegistrationRequest,
 } from '../fbs/api/RegistrationRequest/serialize.mjs';
 import {
+  deserialize as deserializeRegistrationRequest,
+} from '../fbs/api/RegistrationRequest/deserialize.mjs';
+import {
   serialize as serializePublicKeyCredentialCreationOptionsObject,
 } from '../fbs/api/PublicKeyCredentialCreationOptions/serialize.mjs';
+import {
+  deserialize as deserializePublicKeyCredentialCreationOptions,
+} from '../fbs/api/PublicKeyCredentialCreationOptions/deserialize.mjs';
 
-describe(MessageSerializer.name, function describeMessageSerializer() {
+describe(`${MessageSerializer.name} and ${MessageDeSerializer.name}`, function describeMessageSerializer() {
   let log = () => {};
-  let builder = null;
+  // let builder = null;
 
   const payloads = defineSpecPayloads();
 
@@ -42,11 +52,11 @@ describe(MessageSerializer.name, function describeMessageSerializer() {
   });
 
   beforeEach(function doBeforeEach() {
-    builder = new flatbuffers.Builder();
+    // builder = new flatbuffers.Builder();
   });
 
   afterEach(function doAfterEach() {
-    builder = null;
+    // builder = null;
   });
 
   it('should serialize/deserialize messages', async function useMessageSerializer() {
@@ -60,8 +70,19 @@ describe(MessageSerializer.name, function describeMessageSerializer() {
         serializePublicKeyCredentialCreationOptionsObject,
       ],
     ]);
+    const deserializers = new Map([
+      [
+        Payload.RegistrationRequest,
+        deserializeRegistrationRequest,
+      ],
+      [
+        Payload.PublicKeyCredentialCreationOptions,
+        deserializePublicKeyCredentialCreationOptions,
+      ],
+    ]);
 
     for (const payload of payloads) {
+      const builder = new flatbuffers.Builder();
       const messageSerializer = new MessageSerializer(builder, serializers, log);
       const messageObject = {
         meta: {
@@ -73,13 +94,16 @@ describe(MessageSerializer.name, function describeMessageSerializer() {
 
       const serializedMessage = messageSerializer.serialize(messageObject);
 
-      log({
-        serializedMessage,
-      });
-
       expect(serializedMessage).to.exist;
       expect(serializedMessage).to.be.an.instanceof(Uint8Array);
       expect(serializedMessage).to.not.be.empty;
+
+      const messageDeSerializer = new MessageDeSerializer(builder, deserializers, log);
+      const deserializedMessage = messageDeSerializer.deserialize(serializedMessage);
+
+      expect(deserializedMessage).to.exist;
+      expect(deserializedMessage).to.not.be.empty;
+      expect(deserializedMessage).to.deep.equal(messageObject);
     }
   });
 });

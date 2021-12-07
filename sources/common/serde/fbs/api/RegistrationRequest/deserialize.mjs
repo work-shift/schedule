@@ -1,19 +1,18 @@
-import flatbuffers from 'flatbuffers';
 import {
   RegistrationRequest,
 } from '../../generated/mjs/schedule/registration-request.mjs';
 
 // eslint-disable-next-line no-unused-vars
-export const deserialize = (RegistrationRequestBuffer = null, debuglog = () => {}) => {
-  if (RegistrationRequestBuffer === null) {
-    throw new ReferenceError('RegistrationRequestBuffer is undefined');
+export const deserialize = (message = null, debuglog = () => {}) => {
+  if (message === null) {
+    throw new ReferenceError('message is undefined');
   }
 
-  const buffer = new flatbuffers.ByteBuffer(RegistrationRequestBuffer);
+  const payload = {
+    type: message.payloadType(),
+  };
   // eslint-disable-next-line no-unused-vars
-  const registrationRequest = RegistrationRequest.getRootAsRegistrationRequest(buffer);
+  const registrationRequest = message.payload(new RegistrationRequest());
 
-  const result = {};
-
-  return Object.freeze(result);
+  return payload;
 };
