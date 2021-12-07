@@ -15,10 +15,10 @@ import {
 } from '@work-shift/node-inspectlog/inspectlog.mjs';
 import {
   MessageSerializer,
-} from '../api/Message/MessageSerializer.node.mjs';
+} from '../api/Message/node/MessageSerializer.node.mjs';
 import {
   MessageDeSerializer,
-} from '../api/Message/MessageDeSerializer.node.mjs';
+} from '../api/Message/node/MessageDeSerializer.node.mjs';
 import {
   defineSpecPayloads,
 } from './helpers/defineSpecPayloads.mjs';

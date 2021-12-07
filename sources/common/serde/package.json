@@ -11,15 +11,19 @@
   "volta": {
     "node": "17.1.0"
   },
+  "packageManager": "pnpm@6.23.6",
   "exports": {
-    "./serializeMessage.mjs": "./serializeMessage.mjs",
-    "./deserializeMessage.mjs": "./deserializeMessage.mjs",
-    "./MessageTypes.mjs": "./MessageTypes.mjs"
+    "node": {
+      "MessageSerializer": "./sources/common/serde/api/Message/MessageSerializer.node.mjs",
+      "MessageDeSerializer": "./sources/common/serde/api/Message/MessageDeSerializer.node.mjs"
+    },
+    "browser": {
+      "MessageSerializer": "./sources/common/serde/api/Message/MessageSerializer.browser.mjs",
+      "MessageDeSerializer": "./sources/common/serde/api/Message/MessageDeSerializer.browser.mjs"
+    }
   },
   "files": [
-    "serializeMessage.mjs",
-    "deserializeMessage.mjs",
-    "MessageTypes.mjs"
+    "./sources/common/serde/api/**/*.mjs"
   ],
   "types": "./fbs/generated/mjs/types/schedule.d.ts",
   "scripts": {
