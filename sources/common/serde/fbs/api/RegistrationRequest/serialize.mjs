@@ -1,9 +1,6 @@
 import {
   RegistrationRequest,
 } from '../../generated/mjs/schedule/registration-request.mjs';
-// import {
-//   RegistrationRequestClass,
-// } from '../helpers/ClassRegistry/RegistrationRequest.mjs';
 
 export const BINARY_LENGTH = 12;
 
@@ -18,8 +15,4 @@ export const serialize = (builder = null, RegistrationRequestObject = null, debu
   }
 
   return RegistrationRequest.createRegistrationRequest(builder);
-
-  // builder.finish(result_offset);
-
-  // return builder.asUint8Array();
 };
