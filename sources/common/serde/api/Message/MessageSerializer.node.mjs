@@ -1,9 +1,9 @@
 import {
   Meta,
-} from '../../generated/mjs/schedule/meta.mjs';
+} from '../../fbs/generated/mjs/schedule/meta.mjs';
 import {
   Message,
-} from '../../generated/mjs/schedule/message.mjs';
+} from '../../fbs/generated/mjs/schedule/message.mjs';
 
 export class MessageSerializer {
   #builder = null;

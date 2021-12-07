@@ -15,10 +15,10 @@ import {
 } from '@work-shift/node-inspectlog/inspectlog.mjs';
 import {
   MessageSerializer,
-} from '../fbs/api/Message/MessageSerializer.node.mjs';
+} from '../api/Message/MessageSerializer.node.mjs';
 import {
   MessageDeSerializer,
-} from '../fbs/api/Message/MessageDeSerializer.node.mjs';
+} from '../api/Message/MessageDeSerializer.node.mjs';
 import {
   defineSpecPayloads,
 } from './helpers/defineSpecPayloads.mjs';
@@ -27,16 +27,16 @@ import {
 } from '../fbs/generated/mjs/schedule/payload.mjs';
 import {
   serialize as serializeRegistrationRequest,
-} from '../fbs/api/RegistrationRequest/serialize.mjs';
+} from '../api/RegistrationRequest/serialize.mjs';
 import {
   deserialize as deserializeRegistrationRequest,
-} from '../fbs/api/RegistrationRequest/deserialize.mjs';
+} from '../api/RegistrationRequest/deserialize.mjs';
 import {
   serialize as serializePublicKeyCredentialCreationOptionsObject,
-} from '../fbs/api/PublicKeyCredentialCreationOptions/serialize.mjs';
+} from '../api/PublicKeyCredentialCreationOptions/serialize.mjs';
 import {
   deserialize as deserializePublicKeyCredentialCreationOptions,
-} from '../fbs/api/PublicKeyCredentialCreationOptions/deserialize.mjs';
+} from '../api/PublicKeyCredentialCreationOptions/deserialize.mjs';
 
 describe(`${MessageSerializer.name} and ${MessageDeSerializer.name}`, function describeMessageSerializer() {
   let log = () => {};
