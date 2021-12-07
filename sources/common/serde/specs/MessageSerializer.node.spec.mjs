@@ -69,13 +69,15 @@ describe(MessageSerializer.name, function describeMessageSerializer() {
         payload,
       };
 
-      const serializedMessageClassOffset = messageSerializer.serialize(messageObject);
+      const serializedMessage = messageSerializer.serialize(messageObject);
 
       log({
-        serializedMessageClassOffset,
+        serializedMessage,
       });
 
-      expect(serializedMessageClassOffset).to.exist;
+      expect(serializedMessage).to.exist;
+      expect(serializedMessage).to.be.an.instanceof(Uint8Array);
+      expect(serializedMessage).to.not.be.empty;
     }
   });
 });
