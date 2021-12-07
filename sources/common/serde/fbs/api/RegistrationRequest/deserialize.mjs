@@ -14,5 +14,5 @@ export const deserialize = (message = null, debuglog = () => {}) => {
   // eslint-disable-next-line no-unused-vars
   const registrationRequest = message.payload(new RegistrationRequest());
 
-  return payload;
+  return Object.freeze({ ...Object.create(null), ...payload });
 };

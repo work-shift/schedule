@@ -14,12 +14,11 @@ import {
   AuthenticatorSelection,
 } from '../../generated/mjs/schedule/authenticator-selection.mjs';
 
-const define_challenge = (
-  builder = null,
-  sourceObject = null,
-  // eslint-disable-next-line no-unused-vars
-  debuglog = () => {},
-) => PublicKeyCredentialCreationOptions.createChallengeVector(builder, sourceObject.challenge);
+// eslint-disable-next-line no-unused-vars
+const define_challenge = (builder = null, sourceObject = null, debuglog = () => {}) => PublicKeyCredentialCreationOptions.createChallengeVector(
+  builder,
+  sourceObject.challenge,
+);
 
 // eslint-disable-next-line no-unused-vars
 const define_rp = (builder = null, sourceObject = null, debuglog = () => {}) => {

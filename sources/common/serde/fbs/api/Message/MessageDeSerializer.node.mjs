@@ -41,20 +41,17 @@ export class MessageDeSerializer {
 
     const buffer = new flatbuffers.ByteBuffer(messageBuffer);
     const message = Message.getRootAsMessage(buffer);
-    const result = {
-      meta: null,
-      payload: null,
-    };
-
-    result.meta = {
-      id: message.meta().id(),
-      ts: message.meta().ts(),
-    };
-
     const deserialize = this.#deserializers.get(message.payloadType());
 
-    result.payload = deserialize(message, this.#debuglog);
-
-    return result;
+    return Object.freeze({
+      ...Object.create(null),
+      ...{
+        meta: {
+          id: message.meta().id(),
+          ts: message.meta().ts(),
+        },
+        payload: deserialize(message, this.#debuglog),
+      },
+    });
   }
 }
