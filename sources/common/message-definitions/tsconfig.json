@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "alwaysStrict": false,
+    "module": "esnext",
+    "outDir": "./generated/mjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "declaration": true,
+    "declarationDir": "./generated/mjs/types",
+    "declarationMap": false,
+    "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "isolatedModules": true
+  },
+  "include": ["./generated/ts/**/*"],
+}
