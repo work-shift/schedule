@@ -146,6 +146,47 @@ importers:
       eslint-plugin-node: 11.1.0_eslint@8.3.0
       mocha: 9.1.3
 
+  sources/common/message-definitions:
+    specifiers:
+      '@babel/core': ^7.16.0
+      '@babel/eslint-parser': ^7.16.3
+      '@babel/eslint-plugin': ^7.14.5
+      '@babel/preset-env': ^7.16.4
+      '@work-shift/encoding': workspace:^0.0.0
+      '@work-shift/node-inspectlog': workspace:^0.0.0
+      c8: ^7.10.0
+      chai: ^4.3.4
+      eslint: ^8.3.0
+      eslint-config-airbnb-base: ^15.0.0
+      eslint-plugin-chai-friendly: ^0.7.2
+      eslint-plugin-import: ^2.25.3
+      eslint-plugin-node: ^11.1.0
+      flatbuffers: ^2.0.4
+      mocha: ^9.1.3
+      renamer: ^4.0.0
+      rimraf: ^3.0.2
+      typescript: ^4.6.0-dev.20211130
+    dependencies:
+      '@work-shift/encoding': link:../encoding
+    devDependencies:
+      '@babel/core': 7.16.0
+      '@babel/eslint-parser': 7.16.3_@babel+core@7.16.0+eslint@8.3.0
+      '@babel/eslint-plugin': 7.14.5_1677552dfee246db721b998da1748117
+      '@babel/preset-env': 7.16.4_@babel+core@7.16.0
+      '@work-shift/node-inspectlog': link:../node.inspectlog
+      c8: 7.10.0
+      chai: 4.3.4
+      eslint: 8.3.0
+      eslint-config-airbnb-base: 15.0.0_a32f4f7b9ceb1e357b5ea9f682f0210a
+      eslint-plugin-chai-friendly: 0.7.2_eslint@8.3.0
+      eslint-plugin-import: 2.25.3_eslint@8.3.0
+      eslint-plugin-node: 11.1.0_eslint@8.3.0
+      flatbuffers: 2.0.4
+      mocha: 9.1.3
+      renamer: 4.0.0
+      rimraf: 3.0.2
+      typescript: 4.6.0-dev.20211130
+
   sources/common/node.inspectlog:
     specifiers:
       '@babel/core': ^7.16.0
@@ -174,13 +215,13 @@ importers:
       eslint-plugin-node: 11.1.0_eslint@8.3.0
       mocha: 9.1.3
 
-  sources/common/serde:
+  sources/common/serde/deserializers/Message:
     specifiers:
       '@babel/core': ^7.16.0
       '@babel/eslint-parser': ^7.16.3
       '@babel/eslint-plugin': ^7.14.5
       '@babel/preset-env': ^7.16.4
-      '@work-shift/encoding': workspace:^0.0.0
+      '@work-shift/message-definitions': workspace:^0.0.0
       '@work-shift/node-inspectlog': workspace:^0.0.0
       c8: ^7.10.0
       chai: ^4.3.4
@@ -195,13 +236,272 @@ importers:
       rimraf: ^3.0.2
       typescript: ^4.6.0-dev.20211130
     dependencies:
-      '@work-shift/encoding': link:../encoding
+      '@work-shift/message-definitions': link:../../../message-definitions
     devDependencies:
       '@babel/core': 7.16.0
       '@babel/eslint-parser': 7.16.3_@babel+core@7.16.0+eslint@8.3.0
       '@babel/eslint-plugin': 7.14.5_1677552dfee246db721b998da1748117
       '@babel/preset-env': 7.16.4_@babel+core@7.16.0
-      '@work-shift/node-inspectlog': link:../node.inspectlog
+      '@work-shift/node-inspectlog': link:../../../node.inspectlog
+      c8: 7.10.0
+      chai: 4.3.4
+      eslint: 8.3.0
+      eslint-config-airbnb-base: 15.0.0_a32f4f7b9ceb1e357b5ea9f682f0210a
+      eslint-plugin-chai-friendly: 0.7.2_eslint@8.3.0
+      eslint-plugin-import: 2.25.3_eslint@8.3.0
+      eslint-plugin-node: 11.1.0_eslint@8.3.0
+      flatbuffers: 2.0.4
+      mocha: 9.1.3
+      renamer: 4.0.0
+      rimraf: 3.0.2
+      typescript: 4.6.0-dev.20211130
+
+  sources/common/serde/deserializers/PublicKeyCredentialCreationOptions:
+    specifiers:
+      '@babel/core': ^7.16.0
+      '@babel/eslint-parser': ^7.16.3
+      '@babel/eslint-plugin': ^7.14.5
+      '@babel/preset-env': ^7.16.4
+      '@work-shift/message-definitions': workspace:^0.0.0
+      '@work-shift/node-inspectlog': workspace:^0.0.0
+      c8: ^7.10.0
+      chai: ^4.3.4
+      eslint: ^8.3.0
+      eslint-config-airbnb-base: ^15.0.0
+      eslint-plugin-chai-friendly: ^0.7.2
+      eslint-plugin-import: ^2.25.3
+      eslint-plugin-node: ^11.1.0
+      flatbuffers: ^2.0.4
+      mocha: ^9.1.3
+      renamer: ^4.0.0
+      rimraf: ^3.0.2
+      typescript: ^4.6.0-dev.20211130
+    dependencies:
+      '@work-shift/message-definitions': link:../../../message-definitions
+    devDependencies:
+      '@babel/core': 7.16.0
+      '@babel/eslint-parser': 7.16.3_@babel+core@7.16.0+eslint@8.3.0
+      '@babel/eslint-plugin': 7.14.5_1677552dfee246db721b998da1748117
+      '@babel/preset-env': 7.16.4_@babel+core@7.16.0
+      '@work-shift/node-inspectlog': link:../../../node.inspectlog
+      c8: 7.10.0
+      chai: 4.3.4
+      eslint: 8.3.0
+      eslint-config-airbnb-base: 15.0.0_a32f4f7b9ceb1e357b5ea9f682f0210a
+      eslint-plugin-chai-friendly: 0.7.2_eslint@8.3.0
+      eslint-plugin-import: 2.25.3_eslint@8.3.0
+      eslint-plugin-node: 11.1.0_eslint@8.3.0
+      flatbuffers: 2.0.4
+      mocha: 9.1.3
+      renamer: 4.0.0
+      rimraf: 3.0.2
+      typescript: 4.6.0-dev.20211130
+
+  sources/common/serde/deserializers/RegistrationRequest:
+    specifiers:
+      '@babel/core': ^7.16.0
+      '@babel/eslint-parser': ^7.16.3
+      '@babel/eslint-plugin': ^7.14.5
+      '@babel/preset-env': ^7.16.4
+      '@work-shift/message-definitions': workspace:^0.0.0
+      '@work-shift/node-inspectlog': workspace:^0.0.0
+      c8: ^7.10.0
+      chai: ^4.3.4
+      eslint: ^8.3.0
+      eslint-config-airbnb-base: ^15.0.0
+      eslint-plugin-chai-friendly: ^0.7.2
+      eslint-plugin-import: ^2.25.3
+      eslint-plugin-node: ^11.1.0
+      flatbuffers: ^2.0.4
+      mocha: ^9.1.3
+      renamer: ^4.0.0
+      rimraf: ^3.0.2
+      typescript: ^4.6.0-dev.20211130
+    dependencies:
+      '@work-shift/message-definitions': link:../../../message-definitions
+    devDependencies:
+      '@babel/core': 7.16.0
+      '@babel/eslint-parser': 7.16.3_@babel+core@7.16.0+eslint@8.3.0
+      '@babel/eslint-plugin': 7.14.5_1677552dfee246db721b998da1748117
+      '@babel/preset-env': 7.16.4_@babel+core@7.16.0
+      '@work-shift/node-inspectlog': link:../../../node.inspectlog
+      c8: 7.10.0
+      chai: 4.3.4
+      eslint: 8.3.0
+      eslint-config-airbnb-base: 15.0.0_a32f4f7b9ceb1e357b5ea9f682f0210a
+      eslint-plugin-chai-friendly: 0.7.2_eslint@8.3.0
+      eslint-plugin-import: 2.25.3_eslint@8.3.0
+      eslint-plugin-node: 11.1.0_eslint@8.3.0
+      flatbuffers: 2.0.4
+      mocha: 9.1.3
+      renamer: 4.0.0
+      rimraf: 3.0.2
+      typescript: 4.6.0-dev.20211130
+
+  sources/common/serde/serde-specs:
+    specifiers:
+      '@babel/core': ^7.16.0
+      '@babel/eslint-parser': ^7.16.3
+      '@babel/eslint-plugin': ^7.14.5
+      '@babel/preset-env': ^7.16.4
+      '@work-shift/message-definitions': workspace:^0.0.0
+      '@work-shift/node-inspectlog': workspace:^0.0.0
+      '@work-shift/serde-deserializers-message': workspace:^0.0.0
+      '@work-shift/serde-deserializers-public-key-credential-creation-options': workspace:^0.0.0
+      '@work-shift/serde-deserializers-registration-request': workspace:^0.0.0
+      '@work-shift/serde-serializers-message': workspace:^0.0.0
+      '@work-shift/serde-serializers-public-key-credential-creation-options': workspace:^0.0.0
+      '@work-shift/serde-serializers-registration-request': workspace:^0.0.0
+      c8: ^7.10.0
+      chai: ^4.3.4
+      eslint: ^8.3.0
+      eslint-config-airbnb-base: ^15.0.0
+      eslint-plugin-chai-friendly: ^0.7.2
+      eslint-plugin-import: ^2.25.3
+      eslint-plugin-node: ^11.1.0
+      flatbuffers: ^2.0.4
+      mocha: ^9.1.3
+      renamer: ^4.0.0
+      rimraf: ^3.0.2
+      typescript: ^4.6.0-dev.20211130
+    devDependencies:
+      '@babel/core': 7.16.0
+      '@babel/eslint-parser': 7.16.3_@babel+core@7.16.0+eslint@8.3.0
+      '@babel/eslint-plugin': 7.14.5_1677552dfee246db721b998da1748117
+      '@babel/preset-env': 7.16.4_@babel+core@7.16.0
+      '@work-shift/message-definitions': link:../../message-definitions
+      '@work-shift/node-inspectlog': link:../../node.inspectlog
+      '@work-shift/serde-deserializers-message': link:../deserializers/Message
+      '@work-shift/serde-deserializers-public-key-credential-creation-options': link:../deserializers/PublicKeyCredentialCreationOptions
+      '@work-shift/serde-deserializers-registration-request': link:../deserializers/RegistrationRequest
+      '@work-shift/serde-serializers-message': link:../serializers/Message
+      '@work-shift/serde-serializers-public-key-credential-creation-options': link:../serializers/PublicKeyCredentialCreationOptions
+      '@work-shift/serde-serializers-registration-request': link:../serializers/RegistrationRequest
+      c8: 7.10.0
+      chai: 4.3.4
+      eslint: 8.3.0
+      eslint-config-airbnb-base: 15.0.0_a32f4f7b9ceb1e357b5ea9f682f0210a
+      eslint-plugin-chai-friendly: 0.7.2_eslint@8.3.0
+      eslint-plugin-import: 2.25.3_eslint@8.3.0
+      eslint-plugin-node: 11.1.0_eslint@8.3.0
+      flatbuffers: 2.0.4
+      mocha: 9.1.3
+      renamer: 4.0.0
+      rimraf: 3.0.2
+      typescript: 4.6.0-dev.20211130
+
+  sources/common/serde/serializers/Message:
+    specifiers:
+      '@babel/core': ^7.16.0
+      '@babel/eslint-parser': ^7.16.3
+      '@babel/eslint-plugin': ^7.14.5
+      '@babel/preset-env': ^7.16.4
+      '@work-shift/message-definitions': workspace:^0.0.0
+      '@work-shift/node-inspectlog': workspace:^0.0.0
+      c8: ^7.10.0
+      chai: ^4.3.4
+      eslint: ^8.3.0
+      eslint-config-airbnb-base: ^15.0.0
+      eslint-plugin-chai-friendly: ^0.7.2
+      eslint-plugin-import: ^2.25.3
+      eslint-plugin-node: ^11.1.0
+      flatbuffers: ^2.0.4
+      mocha: ^9.1.3
+      renamer: ^4.0.0
+      rimraf: ^3.0.2
+      typescript: ^4.6.0-dev.20211130
+    dependencies:
+      '@work-shift/message-definitions': link:../../../message-definitions
+    devDependencies:
+      '@babel/core': 7.16.0
+      '@babel/eslint-parser': 7.16.3_@babel+core@7.16.0+eslint@8.3.0
+      '@babel/eslint-plugin': 7.14.5_1677552dfee246db721b998da1748117
+      '@babel/preset-env': 7.16.4_@babel+core@7.16.0
+      '@work-shift/node-inspectlog': link:../../../node.inspectlog
+      c8: 7.10.0
+      chai: 4.3.4
+      eslint: 8.3.0
+      eslint-config-airbnb-base: 15.0.0_a32f4f7b9ceb1e357b5ea9f682f0210a
+      eslint-plugin-chai-friendly: 0.7.2_eslint@8.3.0
+      eslint-plugin-import: 2.25.3_eslint@8.3.0
+      eslint-plugin-node: 11.1.0_eslint@8.3.0
+      flatbuffers: 2.0.4
+      mocha: 9.1.3
+      renamer: 4.0.0
+      rimraf: 3.0.2
+      typescript: 4.6.0-dev.20211130
+
+  sources/common/serde/serializers/PublicKeyCredentialCreationOptions:
+    specifiers:
+      '@babel/core': ^7.16.0
+      '@babel/eslint-parser': ^7.16.3
+      '@babel/eslint-plugin': ^7.14.5
+      '@babel/preset-env': ^7.16.4
+      '@work-shift/message-definitions': workspace:^0.0.0
+      '@work-shift/node-inspectlog': workspace:^0.0.0
+      c8: ^7.10.0
+      chai: ^4.3.4
+      eslint: ^8.3.0
+      eslint-config-airbnb-base: ^15.0.0
+      eslint-plugin-chai-friendly: ^0.7.2
+      eslint-plugin-import: ^2.25.3
+      eslint-plugin-node: ^11.1.0
+      flatbuffers: ^2.0.4
+      mocha: ^9.1.3
+      renamer: ^4.0.0
+      rimraf: ^3.0.2
+      typescript: ^4.6.0-dev.20211130
+    dependencies:
+      '@work-shift/message-definitions': link:../../../message-definitions
+    devDependencies:
+      '@babel/core': 7.16.0
+      '@babel/eslint-parser': 7.16.3_@babel+core@7.16.0+eslint@8.3.0
+      '@babel/eslint-plugin': 7.14.5_1677552dfee246db721b998da1748117
+      '@babel/preset-env': 7.16.4_@babel+core@7.16.0
+      '@work-shift/node-inspectlog': link:../../../node.inspectlog
+      c8: 7.10.0
+      chai: 4.3.4
+      eslint: 8.3.0
+      eslint-config-airbnb-base: 15.0.0_a32f4f7b9ceb1e357b5ea9f682f0210a
+      eslint-plugin-chai-friendly: 0.7.2_eslint@8.3.0
+      eslint-plugin-import: 2.25.3_eslint@8.3.0
+      eslint-plugin-node: 11.1.0_eslint@8.3.0
+      flatbuffers: 2.0.4
+      mocha: 9.1.3
+      renamer: 4.0.0
+      rimraf: 3.0.2
+      typescript: 4.6.0-dev.20211130
+
+  sources/common/serde/serializers/RegistrationRequest:
+    specifiers:
+      '@babel/core': ^7.16.0
+      '@babel/eslint-parser': ^7.16.3
+      '@babel/eslint-plugin': ^7.14.5
+      '@babel/preset-env': ^7.16.4
+      '@work-shift/encoding': workspace:^0.0.0
+      '@work-shift/message-definitions': workspace:^0.0.0
+      '@work-shift/node-inspectlog': workspace:^0.0.0
+      c8: ^7.10.0
+      chai: ^4.3.4
+      eslint: ^8.3.0
+      eslint-config-airbnb-base: ^15.0.0
+      eslint-plugin-chai-friendly: ^0.7.2
+      eslint-plugin-import: ^2.25.3
+      eslint-plugin-node: ^11.1.0
+      flatbuffers: ^2.0.4
+      mocha: ^9.1.3
+      renamer: ^4.0.0
+      rimraf: ^3.0.2
+      typescript: ^4.6.0-dev.20211130
+    dependencies:
+      '@work-shift/encoding': link:../../../encoding
+      '@work-shift/message-definitions': link:../../../message-definitions
+    devDependencies:
+      '@babel/core': 7.16.0
+      '@babel/eslint-parser': 7.16.3_@babel+core@7.16.0+eslint@8.3.0
+      '@babel/eslint-plugin': 7.14.5_1677552dfee246db721b998da1748117
+      '@babel/preset-env': 7.16.4_@babel+core@7.16.0
+      '@work-shift/node-inspectlog': link:../../../node.inspectlog
       c8: 7.10.0
       chai: 4.3.4
       eslint: 8.3.0
