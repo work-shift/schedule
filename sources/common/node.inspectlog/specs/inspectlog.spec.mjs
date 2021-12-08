@@ -12,7 +12,7 @@ import {
 describe(inspectlog.name, function describeInspectLog() {
   it('is a dummy test', async function dummyTest() {
     inspectlog('inspectlog')({
-      hello: 'world',
+      inspect: 'log',
     });
 
     return expect(true).to.be.true;
