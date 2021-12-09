@@ -1,6 +1,9 @@
 import {
   WebsocketErrorCodes,
 } from '@work-shift/lib-websocket-error-codes/WebsocketErrorCodes.mjs';
+import {
+  CustomEventTypes,
+} from '../../constants/CustomEventTypes.mjs';
 
 export class Communicator {
   constructor() {
@@ -50,7 +53,7 @@ export class Communicator {
     }
 
     switch (customEvent.data.type) {
-      case 'register:start': {
+      case CustomEventTypes.START_REGISTRATION: {
         console.log(`${this.constructor.name}.handleCustomEvent:`, customEvent.data);
 
         const binaryMessage = this.encoder.encode(JSON.stringify(customEvent.data));

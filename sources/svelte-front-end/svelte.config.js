@@ -26,6 +26,20 @@ const config = {
     serviceWorker: {
       files: (filepath) => !/\.DS_STORE/.test(filepath),
     },
+    vite: {
+      plugins: [
+        {
+          name: 'configure-server',
+          configureServer: (server = null) => {
+            server.middlewares.use((_req, res, next) => {
+              res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+              res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+              next();
+            });
+          },
+        },
+      ],
+    },
   },
 };
 

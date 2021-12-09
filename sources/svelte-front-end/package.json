@@ -29,6 +29,10 @@
     "svelte": "^3.44.2"
   },
   "dependencies": {
-    "@work-shift/lib-websocket-error-codes": "workspace:^0.0.0"
+    "@work-shift/lib-websocket-error-codes": "workspace:^0.0.0",
+    "@work-shift/message-definitions": "workspace:^0.0.0",
+    "@work-shift/serde-serializers-message": "workspace:^0.0.0",
+    "@work-shift/serde-serializers-registration-request": "workspace:^0.0.0",
+    "flatbuffers": "^2.0.4"
   }
 }

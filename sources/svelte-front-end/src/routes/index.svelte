@@ -3,6 +3,9 @@
 </script>
 
 <script>
+  import {
+    CustomEventTypes,
+  } from '../lib/constants/CustomEventTypes.mjs';
   import FingerPrintIcon from '$lib/icons/FingerPrint.svelte';
 
   let isCreatingCredentials = false;
@@ -54,13 +57,13 @@
     // createCredentials();
 
     window.postMessage({
-      type: 'register:start',
-      payload: {},
+      type: CustomEventTypes.START_REGISTRATION,
+      payload: null,
     });
   }
   
   const handleButtonKeyUp = (pointerEvent) => {
-    isCreatingCredentials = false;
+    // isCreatingCredentials = false;
   }
 </script>
 
