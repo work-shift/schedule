@@ -21,7 +21,7 @@
     "preinstall": "npx only-allow pnpm",
     "lint": "./node_modules/.bin/eslint ./ --ext .mjs",
     "rm-rf": "./node_modules/.bin/rimraf ./generated",
-    "build:fbs": "pnpm run rm-rf && flatc --ts --gen-all --reflect-types --natural-utf8 -o ./generated/ts ./schema/Message.fbs",
+    "build:fbs": "pnpm run rm-rf && flatc --ts --gen-all --reflect-types --reflect-names --natural-utf8 -o ./generated/ts ./schema/Message.fbs",
     "transpile:ts": "./node_modules/.bin/tsc --project ./",
     "rename:js-to-mjs": "./node_modules/.bin/renamer --silent --find /\\.js/ --replace .mjs ./generated/mjs/**/*.js",
     "fix:eslint:errors": "./node_modules/.bin/eslint --fix ./generated/mjs",
