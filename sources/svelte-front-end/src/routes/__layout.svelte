@@ -4,26 +4,28 @@
     onDestroy,
   } from 'svelte';
   import {
-    WorkerManager,
-  } from '$lib/workers/WorkerManager.mjs';
+    Kernel,
+  } from '$lib/Kernel/Kernel.mjs';
   import '../app.css';
 
-  let workerManager;
-  const communicatorConfig = Object.freeze({
-    address: 'ws://127.0.0.1:9090/',
+  const kernelConfig = Object.freeze({
+    communicator: {
+      address: 'ws://127.0.0.1:9090/',
+    },
   });
+  let kernel = null;
 
   onMount(async () => {
-    workerManager = new WorkerManager(communicatorConfig);
+    kernel = new Kernel(kernelConfig);
 
-    return await workerManager.start();
+    return await kernel.start();
   });
 
   onDestroy(async () => {
-    if (typeof workerManager !== 'undefined') {
-      await workerManager.stop();
+    if (typeof kernel !== 'undefined') {
+      await kernel.stop();
 
-      workerManager = undefined;
+      kernel = undefined;
     }
   });
 </script>

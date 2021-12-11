@@ -39,6 +39,9 @@ const config = {
           },
         },
       ],
+      build: {
+        assetsInlineLimit: 0,
+      },
     },
   },
 };

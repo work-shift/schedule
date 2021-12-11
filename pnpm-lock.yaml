@@ -527,12 +527,14 @@ importers:
       eslint-plugin-svelte3: ^3.2.1
       flatbuffers: ^2.0.4
       svelte: ^3.44.2
+      xstate: ^4.26.1
     dependencies:
       '@work-shift/lib-websocket-error-codes': link:../common/WebsocketErrorCodes
       '@work-shift/message-definitions': link:../common/message-definitions
       '@work-shift/serde-serializers-message': link:../common/serde/serializers/Message
       '@work-shift/serde-serializers-registration-request': link:../common/serde/serializers/RegistrationRequest
       flatbuffers: 2.0.4
+      xstate: 4.26.1
     devDependencies:
       '@sveltejs/adapter-node': 1.0.0-next.55
       '@sveltejs/kit': 1.0.0-next.201_svelte@3.44.2
@@ -6045,6 +6047,10 @@ packages:
     resolution: {integrity: sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==}
     engines: {node: '>=8'}
     dev: true
+
+  /xstate/4.26.1:
+    resolution: {integrity: sha512-JLofAEnN26l/1vbODgsDa+Phqa61PwDlxWu8+2pK+YbXf+y9pQSDLRvcYH2H1kkeUBA5fGp+xFL/zfE8jNMw4g==}
+    dev: false
 
   /y18n/4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}
