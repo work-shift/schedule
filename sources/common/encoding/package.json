@@ -4,12 +4,12 @@
   "description": "[lib] binary encoding",
   "type": "module",
   "engines": {
-    "node": "=17.1.0",
-    "pnpm": "=6.23.6"
+    "node": "=17.3.0",
+    "pnpm": "=6.24.1"
   },
   "engineStrict": true,
   "volta": {
-    "node": "17.1.0"
+    "node": "17.3.0"
   },
   "exports": {
     "./encode.mjs": "./encode.mjs",
