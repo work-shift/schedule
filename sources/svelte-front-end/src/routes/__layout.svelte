@@ -6,6 +6,9 @@
   import {
     Kernel,
   } from '$lib/Kernel/Kernel.mjs';
+  import {
+    ChannelNames,
+  } from '$lib/constants/ChannelNames.mjs';
   import '../app.css';
 
   const kernelConfig = Object.freeze({
@@ -13,19 +16,35 @@
       address: 'ws://127.0.0.1:9090/',
     },
   });
+  let uiChannel = null;
   let kernel = null;
+  let isLoading = true;
+
+  const handleUIMessage = (messageEvent = null) => {
+    console.log('__layout.handleUIMessage', messageEvent.data);
+  };
 
   onMount(async () => {
+    uiChannel = new BroadcastChannel(ChannelNames.UI);
+
+    uiChannel.addEventListener('message', handleUIMessage);
+
     kernel = new Kernel(kernelConfig);
 
     return await kernel.start();
   });
 
   onDestroy(async () => {
-    if (typeof kernel !== 'undefined') {
+    if (uiChannel !== null) {
+      uiChannel.removeEventListener('message', handleUIMessage);
+      uiChannel.close();
+      uiChannel = null;
+    }
+
+    if (kernel !== null) {
       await kernel.stop();
 
-      kernel = undefined;
+      kernel = null;
     }
   });
 </script>
@@ -42,5 +61,9 @@
 </style>
 
 <main>
-  <slot />
+  {#if isLoading === true}
+    loading...
+  {:else}
+    <slot />
+  {/if}
 </main>
