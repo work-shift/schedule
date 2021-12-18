@@ -1,6 +1,29 @@
 import {
   WebsocketErrorCodes,
 } from '@work-shift/lib-websocket-error-codes/WebsocketErrorCodes.mjs';
+import {
+  ChannelNames,
+} from '../../constants/ChannelNames.mjs';
+import {
+  ProtocolEventNames,
+} from '../../constants/ProtocolEventNames.mjs';
+
+console.log('communicator.ctor');
+
+const workerManagerChannel = new BroadcastChannel(ChannelNames.WORKER_MANAGER);
+const ownChannel = new BroadcastChannel(ChannelNames.COMMUNICATOR);
+
+ownChannel.addEventListener('message', (messageEvent = null) => {
+  console.log('Communicator.worker.onmessage [channel]', messageEvent);
+});
+
+workerManagerChannel.postMessage({
+  type: ProtocolEventNames.WORKER,
+  payload: {
+    name: 'communicator',
+    status: 'ready',
+  },
+});
 
 self.client = null;
 
@@ -62,7 +85,7 @@ self.startClient = (url = null) => new Promise((resolve, reject) => {
   }
 });
 
-self.workerProtocolStart = async (messageEvent = null) => {
+self.workerProtocolConfigurationRequest = async (messageEvent = null) => {
   const {
     data: {
       payload: {
@@ -77,12 +100,12 @@ self.workerProtocolStart = async (messageEvent = null) => {
     await self.startClient(address);
 
     messageEvent.target.postMessage({
-      type: 'protocol:start:res',
+      type: ProtocolEventNames.CONFIGURATION_RES,
       payload: null,
     });
   } catch (startClientError) {
     messageEvent.target.postMessage({
-      type: 'error',
+      type: ProtocolEventNames.CONFIGURATION_RES,
       payload: startClientError,
     });
   }
@@ -99,8 +122,7 @@ self.workerProtocolStop = () => {
 };
 
 const messageHandlers = Object.freeze(new Map([
-  ['protocol:start:req', self.workerProtocolStart],
-  ['protocol:stop:req', self.workerProtocolStop],
+  [ProtocolEventNames.CONFIGURATION_REQ, self.workerProtocolConfigurationRequest],
 ]));
 
 self.executeMessage = (messageEvent = null) => {
@@ -112,6 +134,8 @@ self.executeMessage = (messageEvent = null) => {
 };
 
 onmessage = (messageEvent = null) => {
+  console.log('Communicator.worker.onmessage', messageEvent);
+
   if (messageEvent === null) {
     throw new ReferenceError('messageEvent is undefined');
   }
@@ -121,4 +145,8 @@ onmessage = (messageEvent = null) => {
   }
 
   self.executeMessage(messageEvent);
+};
+
+onerror = (messageEvent = null) => {
+  console.error('onerror', messageEvent);
 };
