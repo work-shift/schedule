@@ -12,39 +12,41 @@
   import '../app.css';
 
   const kernelConfig = Object.freeze({
-    communicator: {
-      address: 'ws://127.0.0.1:9090/',
+    worker: {
+      communicator: {
+        address: 'ws://127.0.0.1:9090/',
+      },
     },
   });
-  let uiChannel = null;
   let kernel = null;
+  let kernelChannel = null;
   let isLoading = true;
 
-  const handleUIMessage = (messageEvent = null) => {
-    console.log('__layout.handleUIMessage', messageEvent.data);
-  };
+  const handleKernelChannelMessage = (messageEvent = null) => {
+    console.log('handleKernelChannelMessage', messageEvent);
+  }
 
-  onMount(async () => {
-    uiChannel = new BroadcastChannel(ChannelNames.UI);
-
-    uiChannel.addEventListener('message', handleUIMessage);
+  onMount(() => {
+    kernelChannel = new BroadcastChannel(ChannelNames.KERNEL);
+    kernelChannel.addEventListener('message', handleKernelChannelMessage);
 
     kernel = new Kernel(kernelConfig);
 
-    return await kernel.start();
+    return kernel.start();
   });
 
   onDestroy(async () => {
-    if (uiChannel !== null) {
-      uiChannel.removeEventListener('message', handleUIMessage);
-      uiChannel.close();
-      uiChannel = null;
-    }
-
     if (kernel !== null) {
       await kernel.stop();
 
       kernel = null;
+    }
+
+    if (kernelChannel !== null) {
+      kernelChannel.removeEventListener('message', handleKernelChannelMessage);
+      kernelChannel.close();
+
+      kernelChannel = null;
     }
   });
 </script>

@@ -10,19 +10,18 @@ import {
 
 console.log('communicator.ctor');
 
-const workerManagerChannel = new BroadcastChannel(ChannelNames.WORKER_MANAGER);
+const kernelChannel = new BroadcastChannel(ChannelNames.KERNEL);
 const ownChannel = new BroadcastChannel(ChannelNames.COMMUNICATOR);
+
+kernelChannel.postMessage({
+  type: ProtocolEventNames.WORKER_CTOR,
+  payload: {
+    name: 'communicator',
+  },
+});
 
 ownChannel.addEventListener('message', (messageEvent = null) => {
   console.log('Communicator.worker.onmessage [channel]', messageEvent);
-});
-
-workerManagerChannel.postMessage({
-  type: ProtocolEventNames.WORKER,
-  payload: {
-    name: 'communicator',
-    status: 'ready',
-  },
 });
 
 self.client = null;
@@ -86,6 +85,8 @@ self.startClient = (url = null) => new Promise((resolve, reject) => {
 });
 
 self.workerProtocolConfigurationRequest = async (messageEvent = null) => {
+  console.log('workerProtocolConfigurationRequest', messageEvent);
+
   const {
     data: {
       payload: {
