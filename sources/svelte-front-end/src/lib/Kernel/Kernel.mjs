@@ -1,84 +1,143 @@
 import {
   ChannelNames,
 } from '../constants/ChannelNames.mjs';
+// import {
+//   ProtocolEventNames,
+// } from '../constants/ProtocolEventNames.mjs';
+import CommunicatorWorker from '$lib/workers/Communicator/Communicator.worker.mjs?worker';
 import {
-  ProtocolEventNames,
-} from '../constants/ProtocolEventNames.mjs';
+  KernelService,
+} from './Kernel.fsm.mjs';
 import {
-  WorkerManager,
-} from '$lib/workers/WorkerManager.mjs';
+  isWorkersCreated,
+} from './fsm.guards/isWorkersCreated.mjs';
+import {
+  createWorkers,
+} from './fsm.services/createWorkers.mjs';
+import {
+  configureWorkers,
+} from './fsm.services/configureWorkers.mjs';
+import { ProtocolEventNames } from '../constants/ProtocolEventNames.mjs';
 
 export class Kernel  {
   constructor(config = null) {
     this.config = Object.freeze({ ...config });
-    this.uiChannel = null;
     this.ownChannel = null;
-    this.workerManagerChannel = null;
-    this.workerManager = null;
+    this.service = null;
 
-    this.handleWorkerManagerChannel = this.handleWorkerManagerChannel.bind(this);
+    this.serviceConfig = {
+      actions: {
+        markWorkerAsStarted: (...args) => {
+          console.log('markWorkerAsStarted', ...args);
+        },
+      },
+      services: {
+        createWorkers: createWorkers(this.handleWorkerMessage),
+        configureWorkers,
+      },
+      delays: {},
+      guards: {
+        isWorkersCreated,
+      },
+    };
+    this.serviceContext = {
+      workers: {
+        communicator: {
+          workerClass: CommunicatorWorker,
+          worker: null,
+          channelName: ChannelNames.COMMUNICATOR,
+          channel: null,
+        },
+      },
+    };
 
     console.log(`${this.constructor.name}.ctor`);
   }
 
-  handleWorkerManagerChannel(messageEvent = null) {
-    console.log(`${this.constructor.name}.handleWorkerManagerChannel`, messageEvent.data);
+  handleWorkerMessage(workerMessageEvent = null) {
+    const {
+      data: {
+        type,
+        payload,
+      },
+    } = workerMessageEvent;
 
-    switch (messageEvent.data.type) {
-      case ProtocolEventNames.CONFIGURATION_RES: {
-        this.uiChannel.postMessage(messageEvent.data);
+    console.log('handleWorkerMessage', type, payload);
+
+    switch (type) {
+      case ProtocolEventNames.WORKER_CTOR: {
+        console.log(`handle "${type}" with`, payload);
 
         break;
       }
       default: {
-        console.error(`${this.constructor.name}.handleWorkerManagerChannel::unknown message type`, messageEvent);
-
-        break;
+        throw TypeError(`unknown event type "${type}"`, workerMessageEvent);
       }
     }
   }
 
-  async start() {
+  handleOwnMessage(workerMessageEvent = null) {
+    const {
+      data: {
+        type,
+        payload,
+      },
+    } = workerMessageEvent;
+
+    console.log('handleOwnMessage', type, payload);
+
+    switch (type) {
+      case ProtocolEventNames.WORKER_CTOR: {
+        console.log(`handle "${type}" with`, payload);
+
+        break;
+      }
+      default: {
+        throw TypeError(`unknown event type "${type}"`, workerMessageEvent);
+      }
+    }
+  }
+
+  start() {
     if (this.ownChannel === null) {
       this.ownChannel = new BroadcastChannel(ChannelNames.KERNEL);
     }
 
-    if (this.workerManagerChannel === null) {
-      this.workerManagerChannel = new BroadcastChannel(ChannelNames.WORKER_MANAGER);
+    this.ownChannel.addEventListener('message', this.handleOwnMessage);
 
-      this.workerManagerChannel.addEventListener('message', this.handleWorkerManagerChannel);
-    }
+    // this.workers.communicator.channel = new BroadcastChannel(this.workers.communicator.channelName);
+    // this.workers.communicator.channel.addEventListener('message', this.handleWorkerMessage);
+    // this.workers.communicator.worker = new this.workers.communicator.workerClass();
+    // this.workers.communicator.channel.postMessage({
+    //   type: ProtocolEventNames.CONFIGURATION_REQ,
+    //   payload: this.config,
+    // });
 
-    if (this.uiChannel === null) {
-      this.uiChannel = new BroadcastChannel(ChannelNames.UI);
-    }
-
-    if (this.workerManager === null) {
-      this.workerManager = new WorkerManager();
-
-      await this.workerManager.start();
-
-      this.workerManagerChannel.postMessage({
-        type: ProtocolEventNames.CONFIGURATION_REQ,
-        payload: this.config,
-      });
-    }
+    this.service = KernelService(this.serviceConfig, this.serviceContext);
+    this.service.start();
   }
 
   async stop() {
-    if (this.workerManager !== null) {
-      this.workerManagerChannel.removeEventListener('message', this.handleWorkerManagerChannel);
-      this.workerManagerChannel.close();
+    for (const [name, workerInfo] of Object.entries(this.workers)) {
+      const {
+        worker,
+        channel,
+      } = workerInfo;
 
-      await this.workerManager.stop();
+      channel.removeEventListener('message', this.handleWorkerMessage);
+      channel.close();
+      worker.terminate();
 
-      this.workerManager = null;
+      this.ownChannel.postMessage({
+        type: 'lifecycle',
+        payload: {
+          method: 'worker.terminate',
+          worker: name,
+        },
+      });
     }
 
-    if (this.uiChannel !== null) {
-      this.uiChannel.close();
-      this.uiChannel = null;
-    }
+    this.workers = null;
 
     if (this.ownChannel !== null) {
       this.ownChannel.close();
