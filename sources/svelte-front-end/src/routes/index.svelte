@@ -10,51 +10,9 @@
 
   let isCreatingCredentials = false;
 
-  const publicKeyCredentialCreationOptions = {
-    challenge: Uint8Array.from('random-bytes-from-server', (c) =>  c.charCodeAt(0)),
-    rp: {
-      name: 'schedule',
-      id: 'localhost',
-    },
-    user: {
-      id: Uint8Array.from('user-random-id', (c) => c.charCodeAt(0)),
-      name: 'user-random-name',
-      displayName: 'user-random-displayName',
-    },
-    pubKeyCredParams: [
-      {
-        alg: -7,
-        type: 'public-key',
-      },
-    ],
-    authenticatorSelection: {
-      authenticatorAttachment: 'platform',
-      userVerification: 'required',
-    },
-    timeout: 60000,
-    attestation: 'enterprise', // direct
-  };
-
-  const createCredentials = async () => {
-    try {
-      const publicKeyCredential = await navigator.credentials.create({
-        publicKey: publicKeyCredentialCreationOptions,
-      });
-
-      console.log({
-        publicKeyCredential,
-      });
-    } catch(credentialsError) {
-      console.error(credentialsError);
-    } finally {
-      isCreatingCredentials = false;
-    }
-  }
-
   const handleButtonKeyDown = (pointerEvent) => {
     isCreatingCredentials = true;
 
-    // createCredentials();
 
     window.postMessage({
       type: CustomEventTypes.START_REGISTRATION,

@@ -13,74 +13,119 @@ const KernelMachine = createMachine({
     initial: {
       always: [
         {
-          target: 'startWorkers',
-          cond: 'isWorkersCreated',
-        },
-        {
           target: 'createWorkers',
         }
       ],
     },
     createWorkers: {
+      always: [
+        {
+          target: 'configureWorkers',
+          cond: 'isWorkersCreated',
+        }
+      ],
       invoke: {
         id: 'createWorkers',
         src: 'createWorkers',
-        // onDone: {
-        //   target: 'configureWorkers',
-        // },
         onError: {
-          target: 'error',
+          target: 'errorCreatingWorkers',
         }
       },
       on: {
-        [ProtocolEventNames.WORKER_CTOR]: {
+        [ProtocolEventNames.WORKER_CREATED]: {
+          actions: [
+            'markWorkerAsCreated',
+          ],
+        },
+      },
+    },
+    configureWorkers: {
+      always: [
+        {
+          target: 'startWorkers',
+          cond: 'isWorkersConfigured',
+        }
+      ],
+      invoke: {
+        id: 'configureWorkers',
+        src: 'configureWorkers',
+        onError: {
+          target: 'errorConfigureWorkers',
+        },
+      },
+      on: {
+        [ProtocolEventNames.WORKER_SET_CONFIG_RES]: {
+          actions: [
+            'markWorkerAsConfigured',
+          ],
+        },
+      },
+    },
+    startWorkers: {
+      always: [
+        {
+          target: 'run',
+          cond: 'isWorkersStarted',
+        }
+      ],
+      invoke: {
+        id: 'startWorkers',
+        src: 'startWorkers',
+        onError: {
+          target: 'errorStartWorkers',
+        },
+      },
+      on: {
+        [ProtocolEventNames.WORKER_START_RES]: {
           actions: [
             'markWorkerAsStarted',
           ],
         },
       },
     },
-    configureWorkers: {
+    run: {
       invoke: {
-        id: 'configureWorkers',
-        src: 'configureWorkers',
-        onDone: {
-          target: 'startWorkers',
-        },
-        onError: {
-          target: 'error',
-        },
+        id: 'reportKernelReady',
+        src: 'reportKernelReady',
       },
     },
-    startWorkers: {
-      entry: [
-        () => {
-          console.log('startWorkers');
-        },
-      ],
+    doneOK: {
+      type: 'final',
+    },
+    errorStartWorkers: {
+      type: 'final',
+    },
+    errorConfigureWorkers: {
+      type: 'final',
+    },
+    errorCreatingWorkers: {
+      type: 'final',
     },
     error: {
+      type: 'final',
+    },
+    done: {
       type: 'final',
     },
   },
 });
 
-export const KernelService = (config = {}, context = {}) => interpret(KernelMachine.withConfig(config).withContext(context))
+export const createKernelService = (config = {}, context = {}) => interpret(KernelMachine.withConfig(config).withContext(context))
   .onTransition((state) => {
-     console.debug('KernelService.onTransition', state);
+     console.debug('KernelMachine.onTransition', state);
   })
   .onChange((state) => {
-    console.debug('KernelService.onChange', state);
+    console.debug('KernelMachine.onChange', state);
   })
   .onDone((doneEvent = null) => {
-    console.debug('KernelService.onDone', doneEvent);
+    console.debug('KernelMachine.onDone', doneEvent);
   })
   .onEvent((event = null) => {
-    console.debug('KernelService.onEvent', event);
+    console.debug('KernelMachine.onEvent', event);
   })
   .onSend((sendEvent = null) => {
-    console.debug('KernelService.onSend', sendEvent);
+    console.debug('KernelMachine.onSend', sendEvent);
   })
   .onStop((stopEvent = null) => {
-    console.debug('KernelService.onStop', stopEvent);
+    console.debug('KernelMachine.onStop', stopEvent);
   });

@@ -1,7 +1,5 @@
 export const ChannelNames = Object.freeze({
-  UI: 'ui',
   KERNEL: 'kernel',
-  WORKER_MANAGER: 'workerManager',
+  WORKERS: 'workers',
   COMMUNICATOR: 'communicator',
-  WORKER: 'worker',
 });
