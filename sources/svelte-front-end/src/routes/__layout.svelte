@@ -9,9 +9,17 @@
   import {
     ChannelNames,
   } from '$lib/constants/ChannelNames.mjs';
+  import {
+    ProtocolEventNames,
+  } from '$lib/constants/ProtocolEventNames.mjs';
   import '../app.css';
 
   const kernelConfig = Object.freeze({
+    kernel: {
+      channels: {
+        UI: ChannelNames.UI,
+      },
+    },
     worker: {
       communicator: {
         address: 'ws://127.0.0.1:9090/',
@@ -20,10 +28,33 @@
   });
   let kernel = null;
   let kernelChannel = null;
-  let isLoading = true;
+  let isKernelReady = true;
 
   const handleKernelChannelMessage = (messageEvent = null) => {
-    console.log('handleKernelChannelMessage', messageEvent);
+    const {
+      data: {
+        type,
+        payload,
+      },
+    } = messageEvent;
+
+    switch (type) {
+      case ProtocolEventNames.KERNEL_READY: {
+        isKernelReady = true;
+
+        break;
+      }
+      // case ProtocolEventNames.KERNEL_UNLOADED: {
+      //   console.log('__layout', type, payload);
+
+      //   isKernelReady = false;
+
+      //   break;
+      // }
+      default: {
+        break;
+      }
+    }
   }
 
   onMount(() => {
@@ -32,7 +63,11 @@
 
     kernel = new Kernel(kernelConfig);
 
-    return kernel.start();
+    kernel.start();
+
+    return () => {
+      console.log('__layout.svelte is unmounted');
+    }
   });
 
   onDestroy(async () => {
@@ -48,6 +83,8 @@
 
       kernelChannel = null;
     }
+
+    console.log('__layout.svelte before unmounting');
   });
 </script>
 
@@ -63,7 +100,7 @@
 </style>
 
 <main>
-  {#if isLoading === true}
+  {#if isKernelReady === false}
     loading...
   {:else}
     <slot />
