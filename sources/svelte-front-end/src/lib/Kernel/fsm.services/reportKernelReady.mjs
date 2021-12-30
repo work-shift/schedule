@@ -5,13 +5,15 @@ import {
   ProtocolEventNames,
 } from '$lib/constants/ProtocolEventNames.mjs';
 
-const kernelChannel = new BroadcastChannel(ChannelNames.KERNEL);
-
 export const reportKernelReady = () => {
+  let kernelChannel = new BroadcastChannel(ChannelNames.KERNEL);
+
   kernelChannel.postMessage({
     type: ProtocolEventNames.KERNEL_READY,
     payload: null,
   });
+
+  kernelChannel.close();
 
   console.log('kernel ready');
 };
