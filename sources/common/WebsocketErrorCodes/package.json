@@ -4,12 +4,12 @@
   "description": "[lib] Websocket Error Codes",
   "type": "module",
   "engines": {
-    "node": "=17.3.0",
-    "pnpm": "=6.24.1"
+    "node": "=17.4.0",
+    "pnpm": "=6.27.1"
   },
   "engineStrict": true,
   "volta": {
-    "node": "17.3.0"
+    "node": "17.4.0"
   },
   "exports": {
     ".": "./WebsocketErrorCodes.mjs",
