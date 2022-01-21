@@ -7,6 +7,9 @@ import {
 import {
   ProtocolEventNames,
 } from '../../constants/ProtocolEventNames.mjs';
+import {
+  createCommunicatorService,
+} from './Communicator.fsm.mjs';
 
 self.name = ChannelNames.COMMUNICATOR;
 
@@ -17,43 +20,26 @@ const workersChannel = new BroadcastChannel(ChannelNames.WORKERS);
 let clientConfig = null;
 // eslint-disable-next-line no-unused-vars
 let client = null;
+let service = null;
 
-function configureClient (messageEvent = null) {
-  clientConfig = Object.freeze({
-    ...Object.create(null),
-    ...messageEvent.data.payload,
-  });
-
-  workersChannel.postMessage({
-    type: ProtocolEventNames.WORKER_SET_CONFIG_RES,
-    payload: {
-      name: ChannelNames.COMMUNICATOR,
+const serviceConfig = Object.freeze({
+  actions: {},
+  services: {
+    createClient: (...args) => {
+      console.log('services.createClient', args);
     },
-  });
-}
-
-// eslint-disable-next-line no-unused-vars
-async function startClient (messageEvent = null) {
-  await startSocket(`${clientConfig.proto}://${clientConfig.host}:${clientConfig.port}${clientConfig.path}`);
-
-  workersChannel.postMessage({
-    type: ProtocolEventNames.WORKER_START_RES,
-    payload: {
-      name: ChannelNames.COMMUNICATOR,
-    },
-  });
-}
-
-const messageHandlers = Object.freeze({
-  [ProtocolEventNames.WORKER_SET_CONFIG_REQ]: configureClient.bind(self),
-  [ProtocolEventNames.WORKER_START_REQ]: startClient.bind(self),
+  },
+  delays: {},
+  guards: {},
 });
+
+const serviceContext = Object.freeze({});
 
 const handleOwnChannelMessages = (messageEvent = null) => {
   typeof messageHandlers[messageEvent.data.type] === 'function'
   ? (messageHandlers[messageEvent.data.type])(messageEvent)
   : () => {
-    throw new TypeError('unknown event type', messageEvent);
+    throw new TypeError('no handler for', messageEvent);
   };
 };
 
@@ -115,6 +101,37 @@ const startSocket = (url = null) => new Promise((resolve, reject) => {
   } catch(startClientError) {
     reject(startClientError);
   }
+});
+
+// eslint-disable-next-line no-unused-vars
+async function startClient(messageEvent = null) {
+  await startSocket(`${clientConfig.proto}://${clientConfig.host}:${clientConfig.port}${clientConfig.path}`);
+
+  workersChannel.postMessage({
+    type: ProtocolEventNames.WORKER_START_RES,
+    payload: {
+      name: ChannelNames.COMMUNICATOR,
+    },
+  });
+}
+
+function configureClient(messageEvent = null) {
+  clientConfig = Object.freeze({
+    ...Object.create(null),
+    ...messageEvent.data.payload,
+  });
+
+  workersChannel.postMessage({
+    type: ProtocolEventNames.WORKER_SET_CONFIG_RES,
+    payload: {
+      name: ChannelNames.COMMUNICATOR,
+    },
+  });
+}
+
+const messageHandlers = Object.freeze({
+  [ProtocolEventNames.WORKER_SET_CONFIG_REQ]: configureClient.bind(self),
+  [ProtocolEventNames.WORKER_START_REQ]: startClient.bind(self),
 });
 
 // const workerProtocolConfigurationRequest = async (messageEvent = null) => {
@@ -186,6 +203,9 @@ const startSocket = (url = null) => new Promise((resolve, reject) => {
 // onerror = (messageEvent = null) => {
 //   console.error('onerror', messageEvent);
 // };
+
+service = createCommunicatorService(serviceConfig, serviceContext);
+service.start();
 
 workersChannel.postMessage({
   type: ProtocolEventNames.WORKER_CREATED,

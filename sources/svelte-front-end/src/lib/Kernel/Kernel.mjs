@@ -79,6 +79,7 @@ export class Kernel  {
           isCreated: false,
           isConfigured: false,
           isStarted: false,
+          // FIXME: the following items should be populated either from env vars, or should be GET'ed
           config: {
             proto: 'ws',
             host: '127.0.0.1',
