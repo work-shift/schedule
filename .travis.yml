@@ -10,8 +10,8 @@ before_install:
   # - sudo apt-get -y install redis
   # - sudo apt install -y flatbuffers-compiler
   - curl https://get.volta.sh | bash
-  - volta install node@17.4.0
-  - volta install pnpm@6.27.1
+  - volta install node@18.4.0
+  - volta install pnpm@7.3.0
   - pnpm config set store-dir ~/.pnpm-store
   - curl -Os https://uploader.codecov.io/latest/linux/codecov
   - chmod +x codecov

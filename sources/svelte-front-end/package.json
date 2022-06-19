@@ -4,12 +4,12 @@
   "description": "schedule",
   "type": "module",
   "engines": {
-    "node": "=17.4.0",
-    "pnpm": "=6.27.1"
+    "node": "=18.4.0",
+    "pnpm": "=7.3.0"
   },
   "engineStrict": true,
   "volta": {
-    "node": "17.4.0"
+    "node": "18.4.0"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -22,18 +22,18 @@
   "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@sveltejs/adapter-node": "^1.0.0-next.55",
-    "@sveltejs/kit": "^1.0.0-next.201",
-    "eslint": "^8.3.0",
-    "eslint-plugin-svelte3": "^3.2.1",
-    "svelte": "^3.44.2"
+    "@sveltejs/adapter-node": "1.0.0-next.78",
+    "@sveltejs/kit": "1.0.0-next.350",
+    "eslint": "^8.18.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "svelte": "^3.48.0"
   },
   "dependencies": {
     "@work-shift/lib-websocket-error-codes": "workspace:^0.0.0",
     "@work-shift/message-definitions": "workspace:^0.0.0",
     "@work-shift/serde-serializers-message": "workspace:^0.0.0",
     "@work-shift/serde-serializers-registration-request": "workspace:^0.0.0",
-    "flatbuffers": "^2.0.4",
-    "xstate": "^4.26.1"
+    "flatbuffers": "^2.0.6",
+    "xstate": "^4.32.1"
   }
 }
