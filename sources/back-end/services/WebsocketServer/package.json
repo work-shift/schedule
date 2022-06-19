@@ -4,12 +4,12 @@
   "description": "Websocket Server",
   "type": "module",
   "engines": {
-    "node": "=17.4.0",
-    "pnpm": "=6.27.1"
+    "node": "=18.4.0",
+    "pnpm": "=7.3.0"
   },
   "engineStrict": true,
   "volta": {
-    "node": "17.4.0"
+    "node": "18.4.0"
   },
   "main": "./server.mjs",
   "bin": "./server.mjs",
@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@work-shift/lib-websocket-server": "workspace:^0.0.0",
-    "dotenv": "^10.0.0"
+    "dotenv": "^16.0.1"
   },
   "nodemonConfig": {
     "restartable": "rs",
@@ -39,6 +39,6 @@
   },
   "devDependencies": {
     "linkemon": "^0.1.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.16"
   }
 }

@@ -4,12 +4,12 @@
   "description": "[lib] Websocket Server",
   "type": "module",
   "engines": {
-    "node": "=17.4.0",
-    "pnpm": "=6.27.1"
+    "node": "=18.4.0",
+    "pnpm": "=7.3.0"
   },
   "engineStrict": true,
   "volta": {
-    "node": "17.4.0"
+    "node": "18.4.0"
   },
   "main": "./LibWebsocketServer.mjs",
   "exports": {
@@ -27,22 +27,22 @@
   "dependencies": {
     "@work-shift/encoding": "workspace:^0.0.0",
     "@work-shift/lib-websocket-error-codes": "workspace:^0.0.0",
-    "fido2-lib": "^2.6.8",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.6.0"
+    "fido2-lib": "^3.2.4",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.10.0"
   },
   "devDependencies": {
-    "c8": "^7.10.0",
-    "chai": "^4.3.4",
+    "c8": "^7.11.3",
+    "chai": "^4.3.6",
     "coveralls": "^3.1.1",
-    "dotenv": "^10.0.0",
-    "eslint": "^8.3.0",
+    "dotenv": "^16.0.1",
+    "eslint": "^8.18.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
-    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
-    "mocha": "^9.1.3",
+    "mocha": "^10.0.0",
     "mocha-lcov-reporter": "^1.3.0",
-    "ws": "^8.3.0"
+    "ws": "^8.8.0"
   },
   "mocha": {
     "allowUncaught": true,
